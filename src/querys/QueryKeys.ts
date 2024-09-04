@@ -4,6 +4,7 @@ export const QueryKeys = {
     MAP: {
         map: ["map"] as const,
         list: () => [...QueryKeys.MAP.map, "list"] as const,
+        year: () => [...QueryKeys.MAP.map, "year"] as const,
     }
 
 

@@ -1,5 +1,4 @@
 import {create} from "zustand";
-import {_MapProps} from "react-kakao-maps-sdk/dist/components/Map";
 import {MAP_DEFAULT_CONST} from "../config/constant";
 
 interface IMapStore {
@@ -12,7 +11,7 @@ interface IMapStore {
 }
 
 const useMapStore = create<IMapStore>((set) => ({
-    zoomLevel: MAP_DEFAULT_CONST.zoomLv,
+    zoomLevel: MAP_DEFAULT_CONST.zoomLv.init,
     setZoomLevel: (arg: number) => set((state) => ({zoomLevel: arg})),
 
     mapCenter: MAP_DEFAULT_CONST.position,

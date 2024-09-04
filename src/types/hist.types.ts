@@ -1,7 +1,8 @@
 export interface IHistory {
     categoryContent: string,
     categoryNm: string,
-    dtm: string,
+    startDtm: string,
+    endDtm: string,
     histNm: string,
     id: string,
     lat: string,
@@ -9,4 +10,9 @@ export interface IHistory {
     logoImgPath: string,
     siteNm: string,
     staffCnt: number
+}
+
+export interface IYearHistory {
+    yearLabel: string,
+    histRecords: IHistory[]
 }

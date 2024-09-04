@@ -9,7 +9,8 @@ const ctx: string = "map";
 export const URL = {
 
     MAP: {
-        list: `http://${window.location.hostname}:${port}/${ctx}/api/hist`
+        LIST: `http://${window.location.hostname}:${port}/${ctx}/api/hist/items`,
+        YEAR: `http://${window.location.hostname}:${port}/${ctx}/api/hist/year-items`
     }
 }
 

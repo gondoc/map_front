@@ -3,8 +3,10 @@ import {IHistory} from "../../types/hist.types";
 import {useEffect} from "react";
 import useMapStore from "../../store/mapStore";
 import {CustomOverlayMap, useMap} from "react-kakao-maps-sdk";
+import {MAP_DEFAULT_CONST} from "../../config/constant";
+import useViewStore from "../../store/viewStore";
 
-export interface IProps {
+interface IProps {
     history: IHistory
 }
 
@@ -17,16 +19,16 @@ const MarkerPopup = (props: IProps) => {
         setZoomLevel,
     } = useMapStore();
 
-    useEffect(() => {
-        if (props?.history) {
-            setMapCenter({center: {lat: +props.history.lat, lng: +props.history.lng}})
-            setZoomLevel(7)
-        }
-    }, [props.history])
+    const {
+        activeSubItemId
+    } = useViewStore();
 
-    const parseBr = (content: string ): string => {
-        return content.replaceAll("\r\n", `<br/>`);
-    }
+    useEffect(() => {
+        if (activeSubItemId) {
+            setMapCenter({center: {lat: +props.history.lat, lng: +props.history.lng}})
+            setZoomLevel(MAP_DEFAULT_CONST.zoomLv.active)
+        }
+    }, [activeSubItemId])
 
     return (
         <CustomOverlayMap
@@ -40,7 +42,7 @@ const MarkerPopup = (props: IProps) => {
                     프로젝트 명 : {props.history.histNm}
                 </PopupTitle>
                 <PopupTitle>
-                    기간 : {props.history.dtm}
+                    기간 : {props.history.startDtm + " ~ " + props.history.endDtm}
                 </PopupTitle>
                 <PopupTitle>
                     개발인원 : {props.history.staffCnt} 명
@@ -87,5 +89,5 @@ const PopupContent = styled.div`
     overflow-y: auto;
     white-space: pre-wrap;
     background: gray;
-    
+
 `

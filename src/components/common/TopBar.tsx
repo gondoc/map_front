@@ -2,12 +2,8 @@ import styled from "styled-components";
 
 const TopBar = () => {
 
-
-
     return (
-        <TopBarWrapper>
-            Gondo's Career Map
-        </TopBarWrapper>
+        <TopBarWrapper>Gondo's Career Map</TopBarWrapper>
     )
 }
 
@@ -20,8 +16,8 @@ const TopBarWrapper = styled.div`
     height: 48px;
     top: 0;
     width: 100%;
-    background: red;
     font-weight: 500;
     font-size: large;
     z-index: 10;
+    background-color: #D6E6F2;
 `
