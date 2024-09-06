@@ -3,9 +3,9 @@ import useMapStore from "../../store/mapStore";
 import styled from "styled-components";
 import {Map, MapMarker, useKakaoLoader} from "react-kakao-maps-sdk";
 import {envConfig} from "../../config/envConfig";
-import {useHistQuery} from "../../querys/MapQuery";
+import {useHistQuery, useYearHistQuery} from "../../querys/MapQuery";
 import {IHistory} from "../../types/hist.types";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import MarkerPopup from "./MarkerPopup";
 import {IMapCenter} from "../../types/map.types";
 import {MAP_DEFAULT_CONST} from "../../config/constant";
@@ -17,27 +17,44 @@ const GisArea = () => {
         mapCenter,
         zoomLevel,
     } = useMapStore();
+
     const {
-        activeSubItemId,
-        setActiveSubItemId,
+        navInfo,
+        setNavInfo
     } = useViewStore();
-    const {data, status} = useHistQuery();
+    const {data: histFetchRes, status: histFetchStatus} = useHistQuery();
+    const {data: yearHistFetchRes, status: yearHistFetchStatus} = useYearHistQuery();
     const [loading, error] = useKakaoLoader({
         appkey: envConfig.API_KAKAO_JS_KEY as string, // 발급 받은 APPKEY
     });
 
     const [position, setPosition] = useState<IMapCenter>(MAP_DEFAULT_CONST.position);
+    const [showHistList, setShowHistList] = useState<IHistory[]>([]);
 
     const clickMarkerHandler = (item: IHistory): void => {
-        if (activeSubItemId && activeSubItemId === item.id) {
-            return setActiveSubItemId(null);
-        }
-        setActiveSubItemId(item.id);
+        // if (snbInfo?.histItem?.id === item.id) {
+        //     return setSnbInfo({...snbInfo, histItem: null});
+        // }
+        // setSnbInfo({...snbInfo, histItem: item});
     }
 
     useEffect(() => {
         setPosition(mapCenter)
     }, [mapCenter])
+
+    useEffect(() => {
+        if (histFetchStatus === "success") {
+            // if(snbInfo.)
+            // if (histFetchRes?.data && histFetchRes?.data?.length > 0) {
+            //     if (!activeYear) {
+            //         setShowHistList(histFetchRes.data)
+            //     } else {
+            //         setShowHistList(histFetchRes.data.filter((hist: IHistory) -> hist.))
+            //     }
+            // }
+        }
+
+    }, [histFetchRes, navInfo])
 
     return (
         <div className={"gis"}>
@@ -50,9 +67,7 @@ const GisArea = () => {
                     disableDoubleClick={false}
                 >
                     {
-                        status === "success" &&
-                        data?.data && data?.data?.length > 0 &&
-                        data.data.map((item: IHistory) => {
+                        showHistList.map((item: IHistory) => {
                             return (
                                 <MapMarker
                                     key={`MAP_MARKER_KEY_${item.id}`}
@@ -63,14 +78,13 @@ const GisArea = () => {
                                     draggable={true}
                                     infoWindowOptions={{zIndex: 0}}
                                 >
-                                    {
-                                        activeSubItemId &&
-                                        activeSubItemId === item.id &&
-                                        <MarkerPopup
-                                            key={`MARKER_POPUP_KEY_${item.id}`}
-                                            history={item}
-                                        />
-                                    }
+                                    {/*{*/}
+                                    {/*    snbInfo?.histItem?.id === item.id &&*/}
+                                    {/*    <MarkerPopup*/}
+                                    {/*        key={`MARKER_POPUP_KEY_${item.id}`}*/}
+                                    {/*        history={item}*/}
+                                    {/*    />*/}
+                                    {/*}*/}
                                 </MapMarker>
                             )
                         })

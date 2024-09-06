@@ -1,19 +1,23 @@
 import {create} from "zustand";
+import {ISnbInfo, TitleType} from "../types/common.types";
+import {INIT_SNB_INFO} from "../config/constant";
 
 interface IViewStore {
-    activeSubItemId: string | null;
-    setActiveSubItemId: (arg: string | null) => void;
+    navInfo: ISnbInfo,
+    setNavInfo: (arg: ISnbInfo) => void;
+    resetNavInfo: () => void;
 
-    activeYear: string | null;
-    setActiveYear: (arg: string | null) => void;
+    // currentSnbItem: TitleType,
+    // setCurrentSnbItem: (arg: TitleType) => void;
 }
 
 const useViewStore = create<IViewStore>((set) => ({
-    activeSubItemId: null,
-    setActiveSubItemId: (arg: string | null) => set((state) => ({activeSubItemId: arg})),
+    navInfo: INIT_SNB_INFO,
+    setNavInfo: (arg: ISnbInfo) => set((state) => ({navInfo: arg})),
+    resetNavInfo: () => set(() => ({navInfo: INIT_SNB_INFO})),
 
-    activeYear: null,
-    setActiveYear: (arg: string | null) => set((state) => ({activeYear: arg})),
+    // currentSnbItem: "none",
+    // setCurrentSnbItem: (arg: TitleType) => set((state) => ({currentSnbItem: arg})),
 
 }))
 

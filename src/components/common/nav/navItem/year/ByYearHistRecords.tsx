@@ -1,18 +1,13 @@
-import {IHistory} from "../../../../types/hist.types";
+import {IHistory} from "../../../../../types/hist.types";
 import styled from "styled-components";
-import {useEffect} from "react";
 
 interface IProps {
     isShow: boolean,
-    activeId: string | null,
+    activeId?: string | null,
     histRecords: IHistory[]
 }
 
 const ByYearHistRecords = (props: IProps) => {
-
-    useEffect(() => {
-        console.log("props.isShow ", props)
-    }, [props.isShow])
 
     return (
         <StYearSubAreaUl
@@ -31,7 +26,6 @@ const ByYearHistRecords = (props: IProps) => {
                         </StYearSubAreaLi>
                     )
                 })
-
             }
         </StYearSubAreaUl>
     )

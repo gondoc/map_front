@@ -1,3 +1,4 @@
+import {ISnbInfo} from "../types/common.types";
 
 export const MAP_DEFAULT_CONST = {
     position: {center: {lat: 36.514217, lng: 127.602323}}, // initialize load default crdnt
@@ -5,6 +6,13 @@ export const MAP_DEFAULT_CONST = {
         init: 12,
         active: 10,
     },
+}
+
+export const INIT_SNB_INFO: ISnbInfo = {
+    currentNav: "none",
+    isOpen: false,
+    activeHistItem: null,
+    year: null,
 }
 
 export const LNB_AREA_CONSTANT = [

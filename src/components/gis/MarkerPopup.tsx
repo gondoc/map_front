@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {IHistory} from "../../types/hist.types";
 import {useEffect} from "react";
 import useMapStore from "../../store/mapStore";
-import {CustomOverlayMap, useMap} from "react-kakao-maps-sdk";
+import {CustomOverlayMap} from "react-kakao-maps-sdk";
 import {MAP_DEFAULT_CONST} from "../../config/constant";
 import useViewStore from "../../store/viewStore";
 
@@ -20,15 +20,15 @@ const MarkerPopup = (props: IProps) => {
     } = useMapStore();
 
     const {
-        activeSubItemId
+        navInfo
     } = useViewStore();
 
     useEffect(() => {
-        if (activeSubItemId) {
-            setMapCenter({center: {lat: +props.history.lat, lng: +props.history.lng}})
-            setZoomLevel(MAP_DEFAULT_CONST.zoomLv.active)
-        }
-    }, [activeSubItemId])
+        // if (snbInfo?.histItem) {
+        //     setMapCenter({center: {lat: +props.history.lat, lng: +props.history.lng}})
+        //     setZoomLevel(MAP_DEFAULT_CONST.zoomLv.active)
+        // }
+    }, [navInfo])
 
     return (
         <CustomOverlayMap
