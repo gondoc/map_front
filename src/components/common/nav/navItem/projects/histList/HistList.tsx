@@ -14,9 +14,6 @@ const HistList = (props: IProps) => {
         setNavInfo,
     } = useViewStore();
 
-    // const [typing, setTyping] = useState<string>("");
-    // const debouncedValue = useDebounce(typing, 1000);
-
     const histItemClickHandler = (clickedItem: IHistory) => {
         if (navInfo?.activeHistItem?.id === clickedItem.id) {
             return setNavInfo({...navInfo, activeHistItem: null});
@@ -24,6 +21,7 @@ const HistList = (props: IProps) => {
         setNavInfo({...navInfo, activeHistItem: clickedItem})
     }
 
+    {/*>{it.siteNm.concat(" ").concat(it.categoryNm)}*/}
     return (
         <StNavSubItemArea
             $isOpen={props.isOpen}
@@ -36,7 +34,7 @@ const HistList = (props: IProps) => {
                             key={`ST_HIST_ITEM_LI_KEY_${it.id}`}
                             $isActive={it.id === navInfo?.activeHistItem?.id}
                             onClick={() => histItemClickHandler(it)}
-                        >{it.siteNm.concat(" ").concat(it.categoryNm)}
+                        >{it.histNm}
                         </StProjectItemLi>
                     )
                 })

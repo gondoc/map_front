@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import HistList from "./histList/HistList";
 import {IHistory} from "../../../../../types/hist.types";
 import {useHistQuery} from "../../../../../querys/MapQuery";
+import SearchArea from "./search/SearchArea";
 
 interface IProps {
     title: TitleType,
@@ -27,6 +28,7 @@ const ProjectNavItem = (props: IProps) => {
     const {data: histFetchRes, isSuccess} = useHistQuery()
 
     const [projectItems, setProjectItems] = useState<IHistory[]>([]);
+    const [typing, setDebouncedTyping] = useState<string>("");
 
     useEffect(() => {
         if (isSuccess) {
@@ -47,9 +49,13 @@ const ProjectNavItem = (props: IProps) => {
             >
                 <StTitle>{props.title}</StTitle>
             </StItemArea>
+            <SearchArea
+                isOpen={navInfo.currentNav === "projects" && navInfo.isOpen}
+                setDebouncedTyping={setDebouncedTyping}
+            />
             <HistList
                 isOpen={navInfo.currentNav === "projects" && navInfo.isOpen}
-                items={projectItems}
+                items={projectItems.filter(item => item.histNm.includes(typing))}
             />
         </>
     )
