@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {IHistory} from "../../../../../../types/hist.types";
 import useViewStore from "../../../../../../store/viewStore";
+import {useEffect} from "react";
 
 interface IProps {
     items: IHistory[],
@@ -21,7 +22,6 @@ const HistList = (props: IProps) => {
         setNavInfo({...navInfo, activeHistItem: clickedItem})
     }
 
-    {/*>{it.siteNm.concat(" ").concat(it.categoryNm)}*/}
     return (
         <StNavSubItemArea
             $isOpen={props.isOpen}

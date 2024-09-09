@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import {ISnbInfo, TitleType} from "../types/common.types";
+import {ISnbInfo, TitleType, ToastStatusType} from "../types/common.types";
 import {INIT_SNB_INFO} from "../config/constant";
 
 interface IViewStore {
@@ -7,8 +7,11 @@ interface IViewStore {
     setNavInfo: (arg: ISnbInfo) => void;
     resetNavInfo: () => void;
 
-    // currentSnbItem: TitleType,
-    // setCurrentSnbItem: (arg: TitleType) => void;
+    searchWord: string,
+    setSearchWord: (arg: string) => void;
+
+    toastStatus: ToastStatusType,
+    setToastStatus: (arg: ToastStatusType) => void;
 }
 
 const useViewStore = create<IViewStore>((set) => ({
@@ -16,9 +19,11 @@ const useViewStore = create<IViewStore>((set) => ({
     setNavInfo: (arg: ISnbInfo) => set((state) => ({navInfo: arg})),
     resetNavInfo: () => set(() => ({navInfo: INIT_SNB_INFO})),
 
-    // currentSnbItem: "none",
-    // setCurrentSnbItem: (arg: TitleType) => set((state) => ({currentSnbItem: arg})),
+    searchWord: "",
+    setSearchWord: (arg: string) => set((state) => ({searchWord: arg})),
 
+    toastStatus: "none",
+    setToastStatus: (arg: ToastStatusType) => set(() => ({toastStatus: arg})),
 }))
 
 export default useViewStore

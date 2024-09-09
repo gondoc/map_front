@@ -1,10 +1,7 @@
-import {IYearHistory} from "../../../../../types/hist.types";
-import {useYearHistQuery} from "../../../../../querys/MapQuery";
-import {useEffect, useState} from "react";
-import useViewStore from "../../../../../store/viewStore";
+import {IYearHistory} from "../../../../../../types/hist.types";
+import useViewStore from "../../../../../../store/viewStore";
 import styled from "styled-components";
-import ByYearHistRecords from "./ByYearHistRecords";
-import HistList, {StNavSubItemArea} from "../projects/histList/HistList";
+import HistList, {StNavSubItemArea} from "../../projects/histList/HistList";
 
 interface IProps {
     isOpen: boolean

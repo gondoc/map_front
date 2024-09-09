@@ -16,29 +16,58 @@ const ProjectNavItem = (props: IProps) => {
     const {
         navInfo,
         setNavInfo,
+
+        searchWord,
+        setToastStatus
     } = useViewStore();
 
     const navItemClickHandler = (navTitle: TitleType) => {
         if (navTitle === navInfo.currentNav) {
-            return setNavInfo({currentNav: "none", isOpen: false, year: null, activeHistItem: null}); // 동일 navItem click
+            return setNavInfo({currentNav: "none", isOpen: false, year: null, activeHistItem: null});
         }
         setNavInfo({currentNav: "projects", isOpen: true, year: null, activeHistItem: null});
     }
 
-    const {data: histFetchRes, isSuccess} = useHistQuery()
+    const {data: histFetchRes, status: histFetchStatus} = useHistQuery()
 
     const [projectItems, setProjectItems] = useState<IHistory[]>([]);
-    const [typing, setDebouncedTyping] = useState<string>("");
+    const [filterItems, setFilterItems] = useState<IHistory[]>([]);
 
     useEffect(() => {
-        if (isSuccess) {
+        if (histFetchStatus === "success") {
             histFetchRes?.data && histFetchRes?.data?.length > 0 && setProjectItems(histFetchRes.data);
+        }
+
+        if (histFetchStatus === "error") {
+            setToastStatus("error");
         }
 
         return (() => {
             setNavInfo({...navInfo, currentNav: "none", isOpen: false, activeHistItem: null})
         })
     }, [histFetchRes])
+
+    useEffect(() => {
+        if (projectItems.length > 0) {
+            if (searchWord.length === 0) {
+                return setFilterItems(projectItems);
+            }
+
+            if (searchWord.length > 0) {
+                const findFilterItems: IHistory[] = findFilterItemsBySearchWord(projectItems, searchWord);
+                findFilterItems.length === 0 && setToastStatus("noResult");
+                return setFilterItems(findFilterItems);
+            }
+        }
+    }, [projectItems, searchWord])
+
+    const findFilterItemsBySearchWord = (histItems: IHistory[], searchWord: string): IHistory[] => {
+        return histItems.filter((item: IHistory) => item.histNm.includes(searchWord));
+    }
+
+    useEffect(() => {
+        console.log("filterItems ", filterItems)
+    }, [filterItems])
 
     return (
         <>
@@ -51,11 +80,10 @@ const ProjectNavItem = (props: IProps) => {
             </StItemArea>
             <SearchArea
                 isOpen={navInfo.currentNav === "projects" && navInfo.isOpen}
-                setDebouncedTyping={setDebouncedTyping}
             />
             <HistList
                 isOpen={navInfo.currentNav === "projects" && navInfo.isOpen}
-                items={projectItems.filter(item => item.histNm.includes(typing))}
+                items={filterItems}
             />
         </>
     )
@@ -85,7 +113,7 @@ export const StItemArea = styled.div<{ $isActive: boolean }>`
     }
 `
 
-const StTitle = styled.div`
+export const StTitle = styled.div`
     display: flex;
     align-items: center;
     padding-left: 11px;

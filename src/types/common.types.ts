@@ -27,21 +27,7 @@ export interface ISnbInfo {
     isPlay?: boolean
 }
 
-// export interface ISnbInfo {
-//     projects: {
-//         isOpen: boolean,
-//         activeItem: IHistory | null,
-//     },
-//     byYear: {
-//         isOpen: boolean,
-//         year: {
-//             isOpen: boolean,
-//             activeYear: string | null,
-//             activeItem: IHistory | null,
-//         },
-//     },
-//     timeLine: {
-//         isOpen: boolean,
-//         isActive: boolean,
-//     }
-// }
+export type ToastStatusType = "none" // 토스트 초기화 상태
+    | "noResult"   // 검색 결과 없음.
+    | "reset"       // 화면이 초기화되었습니다.
+    | "error"       // 통신 상태 에러 // 잠시후 다시 시도 바랍니다.

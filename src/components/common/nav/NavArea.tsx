@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ProjectNavItem from "./navItem/projects/ProjectNavItem";
 import YearNavItem from "./navItem/year/YearNavItem";
+import TimeLineNavItem from "./navItem/timeLine/TimeLineNavItem";
 
 const NavArea = () => {
 
@@ -9,7 +10,7 @@ const NavArea = () => {
             <StNavItemArea>
                 <ProjectNavItem title={"projects"}/>
                 <YearNavItem title={"year"}/>
-                {/*<NavItem title={"timeline"}/>*/}
+                {/*<TimeLineNavItem title={"timeline"}/>*/}
             </StNavItemArea>
         </NavAreaWrapper>
     )

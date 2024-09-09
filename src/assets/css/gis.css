@@ -3,3 +3,7 @@
     width: 100%;
     height: 1032px;
 }
+
+#marker-popup {
+    background: red;
+}

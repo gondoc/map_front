@@ -1,24 +1,36 @@
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 import useDebounce from "../../../../../../hooks/useDebounce";
+import useViewStore from "../../../../../../store/viewStore";
 
 interface IProps {
     isOpen: boolean,
-    setDebouncedTyping: Function,
 }
+
+
 
 const SearchArea = (props: IProps) => {
 
+    const {
+        setSearchWord
+    } = useViewStore();
     const [typing, setTyping] = useState<string>("");
-    const debouncedValue = useDebounce(typing, 300);
+    const debouncedValue = useDebounce(typing, 1000);
 
     useEffect(() => {
-        props.setDebouncedTyping(debouncedValue);
+        setSearchWord(debouncedValue);
     }, [debouncedValue])
 
     useEffect(() => {
         !props.isOpen && setTyping("");
     }, [props.isOpen])
+
+    const onKeyUpHandler = (pressKey: string) => {
+        if (pressKey === "escape") {
+            setSearchWord("")
+            return setTyping("")
+        }
+    }
 
     return (
         <StSearchArea
@@ -29,6 +41,7 @@ const SearchArea = (props: IProps) => {
                 placeholder={"검색"}
                 value={typing}
                 onChange={(e) => setTyping(e.target.value)}
+                onKeyUp={(e) => onKeyUpHandler(e.key)}
             />
         </StSearchArea>
     )

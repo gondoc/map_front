@@ -2,6 +2,7 @@ import TopBar from "../components/common/TopBar";
 import NavArea from "../components/common/nav/NavArea";
 import GisArea from "../components/gis/GisArea";
 import UseInitPage from "../hooks/useInitPage";
+import ToastArea from "../components/common/toast/ToastArea";
 
 const MainPage = ()=> {
 
@@ -15,6 +16,8 @@ const MainPage = ()=> {
             <NavArea/>
             {/*지도 표출 영역*/}
             <GisArea/>
+            {/*토스트 알림 영역*/}
+            <ToastArea/>
         </div>
     )
 }

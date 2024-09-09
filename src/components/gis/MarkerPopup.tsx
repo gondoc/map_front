@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {IHistory} from "../../types/hist.types";
 import {useEffect} from "react";
 import useMapStore from "../../store/mapStore";
-import {CustomOverlayMap} from "react-kakao-maps-sdk";
+import {CustomOverlayMap, MapInfoWindow, useMap} from "react-kakao-maps-sdk";
 import {MAP_DEFAULT_CONST} from "../../config/constant";
 import useViewStore from "../../store/viewStore";
 
@@ -12,46 +12,57 @@ interface IProps {
 
 const MarkerPopup = (props: IProps) => {
 
-    const {
-        mapCenter,
-        setMapCenter,
-        zoomLevel,
-        setZoomLevel,
-    } = useMapStore();
+    const map: kakao.maps.Map = useMap();
 
     const {
         navInfo
     } = useViewStore();
 
     useEffect(() => {
-        // if (snbInfo?.histItem) {
-        //     setMapCenter({center: {lat: +props.history.lat, lng: +props.history.lng}})
-        //     setZoomLevel(MAP_DEFAULT_CONST.zoomLv.active)
-        // }
+        if (navInfo?.activeHistItem) {
+            map.setLevel(map.getLevel(), {animate: {duration: 550}})
+            map.panTo(new kakao.maps.LatLng(+props.history.lat, +props.history.lng))
+        }
     }, [navInfo])
 
+    const activateWheelScroll = () => {
+        return map.setZoomable(true);
+    }
+
+    const disableWheelScroll = () => {
+        return map.setZoomable(false);
+    }
+
     return (
-        <CustomOverlayMap
-            position={{lat: +props.history.lat, lng: +props.history.lng}}
-            clickable={true}
-            xAnchor={-0.05}
-            yAnchor={0.15}
+        <div
+            // onMouseMove={disableWheelScroll}
+            onMouseOver={disableWheelScroll}
+            // onMouseEnter={disableWheelScroll}
+            onMouseOut={activateWheelScroll}
         >
-            <MarkerPopupArea>
-                <PopupTitle>
-                    프로젝트 명 : {props.history.histNm}
-                </PopupTitle>
-                <PopupTitle>
-                    기간 : {props.history.startDtm + " ~ " + props.history.endDtm}
-                </PopupTitle>
-                <PopupTitle>
-                    개발인원 : {props.history.staffCnt} 명
-                </PopupTitle>
-                <PopupContent>
-                    {props.history.categoryContent}
-                </PopupContent>
-            </MarkerPopupArea>
-        </CustomOverlayMap>
+            <CustomOverlayMap
+                position={{lat: +props.history.lat, lng: +props.history.lng}}
+                clickable={true}
+                xAnchor={-0.07}
+                yAnchor={0.15}
+                zIndex={10}
+            >
+                <MarkerPopupArea>
+                    <PopupTitle>
+                        프로젝트 명 : {props.history.histNm}
+                    </PopupTitle>
+                    <PopupTitle>
+                        기간 : {props.history.startDtm + " ~ " + props.history.endDtm}
+                    </PopupTitle>
+                    <PopupTitle>
+                        개발인원 : {props.history.staffCnt} 명
+                    </PopupTitle>
+                    <PopupContent>
+                        {props.history.categoryContent}
+                    </PopupContent>
+                </MarkerPopupArea>
+            </CustomOverlayMap>
+        </div>
     )
 }
 
@@ -63,31 +74,35 @@ const MarkerPopupArea = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 450px;
-    height: 300px;
-    color: white;
+    width: 367px;
+    height: min-content;
+    color: black;
     z-index: 10;
-    overflow-y: auto;
-
     gap: 3px;
-    //opacity: 0.3;
+
+    border-radius: 8px;
+    background-color: #769FCD;
+    border: 3px solid #769FCD;
+    font-size: smaller;
 `
 
 const PopupTitle = styled.div`
-    width: 100%;
+    display: flex;
+    align-items: center;
+    width: 354px;
+    border-radius: 2px;
     height: 25px;
-    background: gray;
-
-    //padding-left: 3px;
-    //border: 3px solid black;
-    //border-radius: 3px;
+    text-align: left;
+    background-color: #F7FBFC;
+    padding-left: 13px;
 `
 
 const PopupContent = styled.div`
-    width: 100%;
-    height: 800px;
-    overflow-y: auto;
+    width: 354px;
+    border-radius: 2px;
+    height: min-content;
     white-space: pre-wrap;
-    background: gray;
-
+    //padding-left: 13px;
+    padding: 3px 0 10px 13px;
+    background-color: #F7FBFC;
 `

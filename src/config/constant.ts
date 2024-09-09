@@ -15,6 +15,22 @@ export const INIT_SNB_INFO: ISnbInfo = {
     year: null,
 }
 
+export const TOAST_CONTENT = {
+    none: {
+        content: "",
+    },
+    noResult: {
+        content: `설정한 {search} 검색어에 대한 검색 결과가 없습니다.`
+    },
+    reset: {
+        content: "화면이 초기화되었습니다."
+    },
+    error: {
+        content: "에러가 발생하였습니다. 잠시후 시도 바랍니다."
+    },
+
+}
+
 export const LNB_AREA_CONSTANT = [
     {
         name: "project",

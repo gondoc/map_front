@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import useViewStore from "../../../../../store/viewStore";
 import {TitleType} from "../../../../../types/common.types";
-import YearList from "./YearList";
+import YearList from "./yearList/YearList";
 import {useYearHistQuery} from "../../../../../querys/MapQuery";
 import {useEffect, useState} from "react";
 import {IYearHistory} from "../../../../../types/hist.types";
+import {StItemArea, StTitle} from "../projects/ProjectNavItem";
 
 interface IProps {
     title: TitleType,
@@ -26,7 +27,7 @@ const YearNavItem = (props: IProps) => {
         }
 
         return (() => {
-            setNavInfo({currentNav: "year", isOpen: false, year: null, activeHistItem: null})
+            setNavInfo({...navInfo, currentNav: "none", isOpen: false, activeHistItem: null})
         })
     }, [yearHistRes])
 
@@ -55,31 +56,3 @@ const YearNavItem = (props: IProps) => {
 }
 
 export default YearNavItem
-
-export const StItemArea = styled.div<{ $isActive: boolean }>`
-    display: flex;
-    align-items: center;
-    margin-top: 11px;
-    border-radius: 8px;
-    width: 240px;
-    height: 40px;
-
-    transition: all 250ms;
-    background: ${(props) => props.$isActive ? "#769FCD" : "#D6E6F2"};
-    color: ${(props) => props.$isActive ? "#FFFFFF" : "black"};
-
-    &:hover {
-        background-color: ${(props) => props.$isActive ? "#769FCD" : "#B9D7EA"};;
-    }
-
-    &:active {
-        color: #FFFFFF;
-        background-color: #769FCD;
-    }
-`
-
-const StTitle = styled.div`
-    display: flex;
-    align-items: center;
-    padding-left: 11px;
-`

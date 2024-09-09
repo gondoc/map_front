@@ -4,12 +4,13 @@ import styled from "styled-components";
 import {Map, MapMarker, useKakaoLoader} from "react-kakao-maps-sdk";
 import {envConfig} from "../../config/envConfig";
 import {useHistQuery, useYearHistQuery} from "../../querys/MapQuery";
-import {IHistory} from "../../types/hist.types";
+import {IHistory, IYearHistory} from "../../types/hist.types";
 import React, {useEffect, useState} from "react";
 import MarkerPopup from "./MarkerPopup";
 import {IMapCenter} from "../../types/map.types";
 import {MAP_DEFAULT_CONST} from "../../config/constant";
 import useViewStore from "../../store/viewStore";
+import ResetBtn from "./ResetBtn";
 
 const GisArea = () => {
 
@@ -20,22 +21,24 @@ const GisArea = () => {
 
     const {
         navInfo,
-        setNavInfo
+        setNavInfo,
+        searchWord
     } = useViewStore();
     const {data: histFetchRes, status: histFetchStatus} = useHistQuery();
     const {data: yearHistFetchRes, status: yearHistFetchStatus} = useYearHistQuery();
     const [loading, error] = useKakaoLoader({
         appkey: envConfig.API_KAKAO_JS_KEY as string, // 발급 받은 APPKEY
+
     });
 
     const [position, setPosition] = useState<IMapCenter>(MAP_DEFAULT_CONST.position);
     const [showHistList, setShowHistList] = useState<IHistory[]>([]);
 
     const clickMarkerHandler = (item: IHistory): void => {
-        // if (snbInfo?.histItem?.id === item.id) {
-        //     return setSnbInfo({...snbInfo, histItem: null});
-        // }
-        // setSnbInfo({...snbInfo, histItem: item});
+        if (navInfo?.activeHistItem?.id === item.id) {
+            return setNavInfo({...navInfo, activeHistItem: null});
+        }
+        setNavInfo({...navInfo, activeHistItem: item});
     }
 
     useEffect(() => {
@@ -43,18 +46,26 @@ const GisArea = () => {
     }, [mapCenter])
 
     useEffect(() => {
-        if (histFetchStatus === "success") {
-            // if(snbInfo.)
-            // if (histFetchRes?.data && histFetchRes?.data?.length > 0) {
-            //     if (!activeYear) {
-            //         setShowHistList(histFetchRes.data)
-            //     } else {
-            //         setShowHistList(histFetchRes.data.filter((hist: IHistory) -> hist.))
-            //     }
-            // }
+        if (navInfo.currentNav !== "year") {
+            if (histFetchRes?.data && histFetchRes?.data?.length > 0 &&
+                histFetchStatus === "success"
+            ) {
+                const showList: IHistory[] = histFetchRes.data
+                    .filter((hist: IHistory) => hist.histNm.includes(searchWord)) as IHistory[];
+                return setShowHistList(showList);
+            }
+        } else {
+            if (yearHistFetchRes?.data && yearHistFetchRes?.data?.length > 0 &&
+                yearHistFetchStatus === "success" &&
+                navInfo?.year?.activeYear
+            ) {
+                const showList: IHistory[] = yearHistFetchRes?.data
+                    .find((yearHist: IYearHistory) => yearHist.yearLabel === navInfo.year?.activeYear!!)
+                    ?.histRecords as IHistory[];
+                return setShowHistList(showList);
+            }
         }
-
-    }, [histFetchRes, navInfo])
+    }, [navInfo, histFetchRes, yearHistFetchRes, searchWord])
 
     return (
         <div className={"gis"}>
@@ -65,7 +76,9 @@ const GisArea = () => {
                     level={zoomLevel}
                     style={{width: '100%', height: '100%'}}
                     disableDoubleClick={false}
+                    minLevel={12}
                 >
+
                     {
                         showHistList.map((item: IHistory) => {
                             return (
@@ -79,7 +92,7 @@ const GisArea = () => {
                                     infoWindowOptions={{zIndex: 0}}
                                 >
                                     {/*{*/}
-                                    {/*    snbInfo?.histItem?.id === item.id &&*/}
+                                    {/*    navInfo?.activeHistItem?.id === item.id &&*/}
                                     {/*    <MarkerPopup*/}
                                     {/*        key={`MARKER_POPUP_KEY_${item.id}`}*/}
                                     {/*        history={item}*/}
@@ -89,7 +102,16 @@ const GisArea = () => {
                             )
                         })
                     }
+                    {
+                        navInfo?.activeHistItem?.id &&
+                        <MarkerPopup
+                            key={`MARKER_POPUP_KEY_${navInfo?.activeHistItem?.id}`}
+                            history={navInfo?.activeHistItem as IHistory}
+                        />
+                    }
                 </Map>
+
+                <ResetBtn/>
             </StyledGisMapArea>
         </div>
     )
