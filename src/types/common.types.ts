@@ -16,7 +16,7 @@ export type TitleType = "none" // 초기화 상태
     | "year"     // 연도별 보기
     | "timeline"    // 타임라인 보기
 
-export interface ISnbInfo {
+export interface INavInfo {
     currentNav: TitleType
     isOpen: boolean,
     activeHistItem: IHistory | null,
@@ -28,6 +28,7 @@ export interface ISnbInfo {
 }
 
 export type ToastStatusType = "none" // 토스트 초기화 상태
-    | "noResult"   // 검색 결과 없음.
+    | "noResult"    // 검색 결과 없음.
     | "reset"       // 화면이 초기화되었습니다.
     | "error"       // 통신 상태 에러 // 잠시후 다시 시도 바랍니다.
+    | "timeline"    // 타임라인 기능을 시작합니다.

@@ -31,7 +31,7 @@ const TimeLineNavItem = (props: IProps) => {
                 <StTitle>{props.title}</StTitle>
             </StItemArea>
             <TimeLinePlayer
-                isOpen={navInfo.currentNav === "timeline" && navInfo.isOpen}
+                isActive={navInfo.currentNav === "timeline" && navInfo.isOpen}
             />
         </>
     )

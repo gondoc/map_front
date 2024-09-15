@@ -1,4 +1,4 @@
-import {ISnbInfo} from "../types/common.types";
+import {INavInfo} from "../types/common.types";
 
 export const MAP_DEFAULT_CONST = {
     position: {center: {lat: 36.514217, lng: 127.602323}}, // initialize load default crdnt
@@ -8,7 +8,7 @@ export const MAP_DEFAULT_CONST = {
     },
 }
 
-export const INIT_SNB_INFO: ISnbInfo = {
+export const INIT_SNB_INFO: INavInfo = {
     currentNav: "none",
     isOpen: false,
     activeHistItem: null,
@@ -27,6 +27,9 @@ export const TOAST_CONTENT = {
     },
     error: {
         content: "에러가 발생하였습니다. 잠시후 시도 바랍니다."
+    },
+    timeline: {
+        content: "타임라인 기능을 실행합니다."
     },
 
 }

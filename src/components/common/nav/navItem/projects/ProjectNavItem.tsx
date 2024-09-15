@@ -92,6 +92,8 @@ const ProjectNavItem = (props: IProps) => {
 export default ProjectNavItem
 
 export const StItemArea = styled.div<{ $isActive: boolean }>`
+    position: relative;
+
     display: flex;
     align-items: center;
     margin-top: 11px;

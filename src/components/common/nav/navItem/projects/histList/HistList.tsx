@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {IHistory} from "../../../../../../types/hist.types";
 import useViewStore from "../../../../../../store/viewStore";
-import {useEffect} from "react";
 
 interface IProps {
     items: IHistory[],
@@ -46,7 +45,8 @@ const HistList = (props: IProps) => {
 export default HistList
 
 export const StNavSubItemArea = styled.div<{ $isOpen: boolean, $itemSize: number }>`
-    display: flex;
+    position: relative;
+
     align-items: center;
     flex-direction: column;
     width: 240px;

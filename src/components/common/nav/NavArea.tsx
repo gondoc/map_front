@@ -10,7 +10,7 @@ const NavArea = () => {
             <StNavItemArea>
                 <ProjectNavItem title={"projects"}/>
                 <YearNavItem title={"year"}/>
-                {/*<TimeLineNavItem title={"timeline"}/>*/}
+                <TimeLineNavItem title={"timeline"}/>
             </StNavItemArea>
         </NavAreaWrapper>
     )
@@ -34,4 +34,5 @@ const StNavItemArea = styled.div`
     align-items: center;
     justify-content: flex-start;
     width: 260px;
+    height: auto;
 `

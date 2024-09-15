@@ -23,14 +23,17 @@ const YearList = (props: IProps) => {
     }
 
     return (
-        <StNavSubItemArea
+        <StYearListArea
             $isOpen={props.isOpen}
-            $itemSize={props?.items?.length}
         >
             {
                 props.items.map((it: IYearHistory) => {
                     return (
-                        <StYearSubArea key={`YEAR_HIST_ITEMS_KEY_${it.yearLabel}`}>
+                        <StYearSubArea
+                            key={`YEAR_HIST_ITEMS_KEY_${it.yearLabel}`}
+                            $isOpen={props.isOpen}
+                            $itemSize={props.isOpen ? props.items.length + it.histRecords.length : props?.items?.length}
+                        >
                             <StYearLabelArea
                                 $isActive={navInfo?.year?.activeYear === it.yearLabel}
                                 onClick={() => yearLabelClickHandler(it.yearLabel)}
@@ -46,13 +49,46 @@ const YearList = (props: IProps) => {
                     )
                 })
             }
-        </StNavSubItemArea>
+            {/*{*/}
+            {/*    <HistList*/}
+            {/*        items={it.histRecords}*/}
+            {/*        isOpen={*/}
+            {/*            navInfo.currentNav === "year" &&*/}
+            {/*            navInfo.year?.activeYear === it.yearLabel*/}
+            {/*        }*/}
+            {/*    />*/}
+            {/*}*/}
+        </StYearListArea>
     )
 }
 
 export default YearList
 
-const StYearSubArea = styled.div``
+const StYearListArea = styled.div<{ $isOpen: boolean }>`
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transition: all 250ms;
+    height: ${(props) => props.$isOpen ? "max-content" : "0"};
+    opacity: ${({$isOpen}) => $isOpen ? '1' : '0'};
+    visibility: ${({$isOpen}) => $isOpen ? 'visible' : 'hidden'};
+
+`
+    // height: ${({$isOpen, $itemSize}) => $isOpen ? `calc(${$itemSize}*23px)` : '0'};
+
+const StYearSubArea = styled.div<{ $isOpen: boolean, $itemSize: number }>`
+    display: contents;
+    flex-direction: column;
+    align-items: center;
+    transition: all 250ms;
+
+    height: ${({$isOpen, $itemSize}) => $isOpen ? "max-content"  : '0'};
+    opacity: ${({$isOpen}) => $isOpen ? '1' : '0'};
+    visibility: ${({$isOpen}) => $isOpen ? 'visible' : 'hidden'};
+`
 
 const StYearLabelArea = styled.div<{ $isActive: boolean }>`
     display: flex;

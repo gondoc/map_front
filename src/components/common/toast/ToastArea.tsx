@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import styled from "styled-components";
 import {TOAST_CONTENT} from "../../../config/constant";
 import {ToastStatusType} from "../../../types/common.types";
+import close_btn from "../../../assets/image/close_btn.svg";
 
 const ToastArea = () => {
 
@@ -32,6 +33,7 @@ const ToastArea = () => {
     }, [toastStatus])
 
     const onClickToastCloseBtn = () => {
+        console.log("test")
         setToastStatus("none");
     }
 
@@ -39,30 +41,16 @@ const ToastArea = () => {
         if (toastStatus !== "noResult") {
             return TOAST_CONTENT[toastStatus].content;
         } else {
-            // return searchWord?.length!! > 0 && TOAST_CONTENT[toastStatus].content.replace("{search}", `<span>"${searchWord}"</span>`);
-            // const content = TOAST_CONTENT[toastStatus].content.replace("{search}", `<span>"${searchWord}"</span>`);
-            //
-            // return content.includes("undefined") && content
             return TOAST_CONTENT[toastStatus].content.replace("{search}", `<span>${searchWord}</span>`);
         }
     }
 
     return (
         <StToastAreaWrapper $isShow={toastStatus !== "none"}>
-            {/*{*/}
-            {/*    toastStatus === "noResult" ? searchWord.length > 0 &&*/}
-            {/*        <StToastArea dangerouslySetInnerHTML={{__html: findShowContent(toastStatus, searchWord)}}/> :*/}
-            {/*        <StToastArea dangerouslySetInnerHTML={{__html: findShowContent(toastStatus)}}/>*/}
-            {/*}*/}
-            {/*{*/}
-            {/*    toastStatus === "error" &&*/}
-            <StToastArea
-                dangerouslySetInnerHTML={{__html: content}}/>
-            {/*}*/}
-            {/*{*/}
-            {/*    toastStatus === "reset" &&*/}
-            {/*    <StToastArea dangerouslySetInnerHTML={{__html: findShowContent(toastStatus)}}/>*/}
-            {/*}*/}
+            <StToastArea>
+                <StToastContentArea dangerouslySetInnerHTML={{__html: content}}/>
+                {/*<StCloseBtn onClick={() => onClickToastCloseBtn()}/>*/}
+            </StToastArea>
         </StToastAreaWrapper>
     )
 }
@@ -80,25 +68,36 @@ const StToastAreaWrapper = styled.div<{ $isShow: boolean }>`
     visibility: ${({$isShow}) => $isShow ? 'visible' : 'hidden'};
 `
 
+const StToastContentArea = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 460px;
+    height: 54px;
+    color: black;
+    font-size: large;
+    white-space: pre-wrap;
+`
+
 const StToastArea = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
     top: 73px;
-    width: 504px;
-    height: 54px;
     z-index: 10;
     border-radius: 8px;
     border: 3px solid #769FCD;
     background-color: #F7FBFC;
-    color: black;
-    font-size: large;
-    white-space: pre-wrap;
-
-    span {
-        white-space: pre-wrap;
-        background-color: #B9D7EA;
-        //color: 
-    }
 `
+
+const StCloseBtn = styled.button`
+    width: 24px;
+    height: 24px;
+    border: none;
+    z-index: 11;
+    margin: 10px;
+    background: url(${close_btn}) no-repeat center/100%;
+`
+
