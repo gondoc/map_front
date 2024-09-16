@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import useDebounce from "../../../../../../hooks/useDebounce";
 import useViewStore from "../../../../../../store/viewStore";
 
@@ -7,10 +7,9 @@ interface IProps {
     isOpen: boolean,
 }
 
-
-
 const SearchArea = (props: IProps) => {
 
+    const inputRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
     const {
         setSearchWord
     } = useViewStore();
@@ -22,8 +21,16 @@ const SearchArea = (props: IProps) => {
     }, [debouncedValue])
 
     useEffect(() => {
-        !props.isOpen && setTyping("");
+        if (props.isOpen) {
+            focusInput();
+        } else {
+            setTyping("");
+        }
     }, [props.isOpen])
+
+    const focusInput = () => {
+        return inputRef.current && inputRef.current.focus();
+    }
 
     const onKeyUpHandler = (pressKey: string) => {
         if (pressKey === "escape") {
@@ -37,6 +44,7 @@ const SearchArea = (props: IProps) => {
             $isOpen={props.isOpen}
         >
             <StProjectSearchInput
+                ref={inputRef}
                 type={"search"}
                 placeholder={"검색"}
                 value={typing}

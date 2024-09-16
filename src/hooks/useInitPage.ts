@@ -24,7 +24,7 @@ const UseInitPage = () => {
         }).finally(() => {
             console.log("by year init fetch finished !! ")
         })
-    }, [])
+    })
 }
 
 export default UseInitPage

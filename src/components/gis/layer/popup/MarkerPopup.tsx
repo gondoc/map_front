@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import {IHistory} from "../../types/hist.types";
+import {IHistory} from "../../../../types/hist.types";
 import {useEffect} from "react";
-import useMapStore from "../../store/mapStore";
+import useMapStore from "../../../../store/mapStore";
 import {CustomOverlayMap, MapInfoWindow, useMap} from "react-kakao-maps-sdk";
-import {MAP_DEFAULT_CONST} from "../../config/constant";
-import useViewStore from "../../store/viewStore";
+import {MAP_DEFAULT_CONST} from "../../../../config/constant";
+import useViewStore from "../../../../store/viewStore";
 
 interface IProps {
     history: IHistory
@@ -19,7 +19,7 @@ const MarkerPopup = (props: IProps) => {
     } = useViewStore();
 
     useEffect(() => {
-        if (navInfo?.activeHistItem) {
+        if (navInfo?.activeHistItem && navInfo.currentNav !== "timeline") {
             map.setLevel(map.getLevel(), {animate: {duration: 550}})
             map.panTo(new kakao.maps.LatLng(+props.history.lat, +props.history.lng))
         }
@@ -35,30 +35,28 @@ const MarkerPopup = (props: IProps) => {
 
     return (
         <div
-            // onMouseMove={disableWheelScroll}
             onMouseOver={disableWheelScroll}
-            // onMouseEnter={disableWheelScroll}
             onMouseOut={activateWheelScroll}
         >
             <CustomOverlayMap
-                position={{lat: +props.history.lat, lng: +props.history.lng}}
+                position={{lat: +props?.history?.lat, lng: +props?.history?.lng}}
                 clickable={true}
                 xAnchor={-0.07}
                 yAnchor={0.15}
                 zIndex={10}
             >
-                <MarkerPopupArea>
+                <MarkerPopupArea $isShow={navInfo?.activeHistItem?.id === props?.history?.id}>
                     <PopupTitle>
-                        프로젝트 명 : {props.history.histNm}
+                        프로젝트 명 : {props?.history?.histNm}
                     </PopupTitle>
                     <PopupTitle>
-                        기간 : {props.history.startDtm + " ~ " + props.history.endDtm}
+                        기간 : {props?.history?.startDtm + " ~ " + props?.history?.endDtm}
                     </PopupTitle>
                     <PopupTitle>
-                        개발인원 : {props.history.staffCnt} 명
+                        개발인원 : {props?.history?.staffCnt} 명
                     </PopupTitle>
                     <PopupContent>
-                        {props.history.categoryContent}
+                        {props?.history?.categoryContent}
                     </PopupContent>
                 </MarkerPopupArea>
             </CustomOverlayMap>
@@ -69,7 +67,7 @@ const MarkerPopup = (props: IProps) => {
 
 export default MarkerPopup
 
-const MarkerPopupArea = styled.div`
+const MarkerPopupArea = styled.div<{ $isShow: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,6 +77,9 @@ const MarkerPopupArea = styled.div`
     color: black;
     z-index: 10;
     gap: 3px;
+    transition: all 550ms;
+    opacity: ${({$isShow}) => $isShow ? '1' : '0'};
+    visibility: ${({$isShow}) => $isShow ? 'visible' : 'hidden'};
 
     border-radius: 8px;
     background-color: #769FCD;

@@ -38,7 +38,6 @@ const TimelineMarkerLayer = () => {
 
     useEffect(() => {
         if (navInfo.isOpen) {
-            console.log("되냐 ", timelineIndex)
             const nextItem: IHistory = reversedHistItems[timelineIndex];
             if (timelineIndex !== TIME_LINE_INIT_INDEX && nextItem) {
                 moveNextItem(nextItem);

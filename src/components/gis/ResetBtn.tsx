@@ -48,7 +48,6 @@ const StResetBtnArea = styled.div`
     border-radius: 8px;
     border: 3px solid #769FCD;
 
-    //transition: all 250ms;
     background: #D6E6F2;
     color: black;
 

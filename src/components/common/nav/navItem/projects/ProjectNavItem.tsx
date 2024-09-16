@@ -65,10 +65,6 @@ const ProjectNavItem = (props: IProps) => {
         return histItems.filter((item: IHistory) => item.histNm.includes(searchWord));
     }
 
-    useEffect(() => {
-        console.log("filterItems ", filterItems)
-    }, [filterItems])
-
     return (
         <>
             <StItemArea

@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import styled from "styled-components";
 import {TOAST_CONTENT} from "../../../config/constant";
 import {ToastStatusType} from "../../../types/common.types";
-import close_btn from "../../../assets/image/close_btn.svg";
 
 const ToastArea = () => {
 
@@ -17,7 +16,6 @@ const ToastArea = () => {
     const [content, setContent] = useState<string>("");
 
     useEffect(() => {
-        console.log("toastStatus ", toastStatus)
         if (toastStatus !== "none") {
             if (toastStatus === "noResult") {
                 if (searchWord.length > 0) {
@@ -32,11 +30,6 @@ const ToastArea = () => {
         }
     }, [toastStatus])
 
-    const onClickToastCloseBtn = () => {
-        console.log("test")
-        setToastStatus("none");
-    }
-
     const findShowContent = (toastStatus: ToastStatusType, searchWord?: string) => {
         if (toastStatus !== "noResult") {
             return TOAST_CONTENT[toastStatus].content;
@@ -49,7 +42,6 @@ const ToastArea = () => {
         <StToastAreaWrapper $isShow={toastStatus !== "none"}>
             <StToastArea>
                 <StToastContentArea dangerouslySetInnerHTML={{__html: content}}/>
-                {/*<StCloseBtn onClick={() => onClickToastCloseBtn()}/>*/}
             </StToastArea>
         </StToastAreaWrapper>
     )
@@ -91,13 +83,3 @@ const StToastArea = styled.div`
     border: 3px solid #769FCD;
     background-color: #F7FBFC;
 `
-
-const StCloseBtn = styled.button`
-    width: 24px;
-    height: 24px;
-    border: none;
-    z-index: 11;
-    margin: 10px;
-    background: url(${close_btn}) no-repeat center/100%;
-`
-
