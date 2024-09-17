@@ -65,11 +65,16 @@ const StToastContentArea = styled.div`
     align-items: center;
     justify-content: center;
 
-    width: 460px;
+    width: auto;
+    margin: 0 15px;
     height: 54px;
     color: black;
     font-size: large;
     white-space: pre-wrap;
+
+    span {
+        background-color: #D6E6F2;
+    }
 `
 
 const StToastArea = styled.div`

@@ -21,8 +21,6 @@ const GisArea = () => {
 
     const {
         navInfo,
-        setNavInfo,
-        searchWord
     } = useViewStore();
 
     const [loading, error] = useKakaoLoader({
