@@ -1,9 +1,6 @@
 import useViewStore from "../../../../../store/viewStore";
 import {TitleType} from "../../../../../types/common.types";
 import {StItemArea, StTitle} from "../projects/ProjectNavItem";
-import TimeLinePlayer from "./player/TimeLinePlayer";
-import {useHistQuery} from "../../../../../querys/MapQuery";
-import {IHistory} from "../../../../../types/hist.types";
 
 interface IProps {
     title: TitleType,
@@ -17,8 +14,6 @@ const TimeLineNavItem = (props: IProps) => {
         setToastStatus
     } = useViewStore();
 
-    const {data: histFetchRes, status: histFetchStatus} = useHistQuery();
-
     const snbItemClickHandler = (clickedTitle: TitleType) => {
         if (clickedTitle === navInfo.currentNav) {
             setToastStatus("deactivatedTimeline");
@@ -29,21 +24,13 @@ const TimeLineNavItem = (props: IProps) => {
     }
 
     return (
-        <>
-            <StItemArea
-                key={`ST_SNB_ITEM_AREA_${props.title}`}
-                $isActive={props.title === navInfo.currentNav}
-                onClick={() => snbItemClickHandler(props.title)}
-            >
-                <StTitle>{props.title}</StTitle>
-            </StItemArea>
-            {/*{*/}
-            {/*    histFetchStatus === "success" && histFetchRes?.data?.length > 0 &&*/}
-            {/*    <TimeLinePlayer*/}
-            {/*        isActive={navInfo.currentNav === "timeline" && navInfo.isOpen}*/}
-            {/*    />*/}
-            {/*}*/}
-        </>
+        <StItemArea
+            key={`ST_SNB_ITEM_AREA_${props.title}`}
+            $isActive={props.title === navInfo.currentNav}
+            onClick={() => snbItemClickHandler(props.title)}
+        >
+            <StTitle>{props.title}</StTitle>
+        </StItemArea>
     )
 }
 

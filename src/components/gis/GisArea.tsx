@@ -50,13 +50,13 @@ const GisArea = () => {
                     style={{width: '100%', height: '100%', top: "48px"}}
                     minLevel={12}
                 >
+                    <ResetBtn/>
+
                     <MapTypeControl position={"TOPRIGHT"}/>
                     <ZoomControl position={"RIGHT"}/>
                     {navInfo.currentNav !== "timeline" ? <MarkerLayer/> : <TimelineMarkerLayer/>}
                     <MarkerPopupLayer activeHistItem={navInfo?.activeHistItem}/>
                 </Map>
-
-                <ResetBtn/>
             </StyledGisMapArea>
         </div>
     )

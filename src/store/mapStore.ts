@@ -2,9 +2,6 @@ import {create} from "zustand";
 import {MAP_DEFAULT_CONST} from "../config/constant";
 
 interface IMapStore {
-
-    resetMapState: () => void;
-
     zoomLevel: number;
     setZoomLevel: (arg: number) => void;
 
@@ -13,11 +10,6 @@ interface IMapStore {
 }
 
 const useMapStore = create<IMapStore>((set) => ({
-    resetMapState: () => set(() => ({
-        zoomLevel: MAP_DEFAULT_CONST.zoomLv.init,
-        mapCenter: MAP_DEFAULT_CONST.position
-    })),
-
     zoomLevel: MAP_DEFAULT_CONST.zoomLv.init,
     setZoomLevel: (arg: number) => set((state) => ({zoomLevel: arg})),
 

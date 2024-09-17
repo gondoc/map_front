@@ -9,7 +9,7 @@ interface IProps {
 
 const SearchArea = (props: IProps) => {
 
-    const inputRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const {
         setSearchWord
     } = useViewStore();
@@ -22,14 +22,14 @@ const SearchArea = (props: IProps) => {
 
     useEffect(() => {
         if (props.isOpen) {
-            focusInput();
+            // inputRef?.current.focus();
         } else {
             setTyping("");
         }
     }, [props.isOpen])
 
     const focusInput = () => {
-        return inputRef.current && inputRef.current.focus();
+        return inputRef.current !== null && inputRef?.current.focus();
     }
 
     const onKeyUpHandler = (pressKey: string) => {
@@ -44,7 +44,11 @@ const SearchArea = (props: IProps) => {
             $isOpen={props.isOpen}
         >
             <StProjectSearchInput
-                ref={inputRef}
+                ref={el => {
+                    return el !== null && el;
+                }}
+                // innerref={inputRef}
+                // innerRef={inputRef}
                 type={"search"}
                 placeholder={"검색"}
                 value={typing}

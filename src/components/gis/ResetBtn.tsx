@@ -1,20 +1,18 @@
 import styled from "styled-components";
 import useViewStore from "../../store/viewStore";
 import useMapStore from "../../store/mapStore";
+import {useMap} from "react-kakao-maps-sdk";
+import {MAP_DEFAULT_CONST} from "../../config/constant";
 
 const ResetBtn = () => {
+
+    const map: kakao.maps.Map = useMap();
 
     const {
         resetNavInfo,
         setSearchWord,
         setToastStatus,
     } = useViewStore();
-
-    const {
-        resetMapState,
-        setZoomLevel,
-        setMapCenter,
-    } = useMapStore();
 
     const resetBtnClickHandler = () => {
         console.log("reset btn clicked !!")
@@ -23,7 +21,9 @@ const ResetBtn = () => {
 
         setSearchWord(""); // 검색어 초기화 처리
 
-        resetMapState(); // 지도 영역 초기화 처리
+        // 지도 영역 초기화 처리
+        map.setLevel(MAP_DEFAULT_CONST.zoomLv.init)
+        map.setCenter(new kakao.maps.LatLng(MAP_DEFAULT_CONST.position.center.lat, MAP_DEFAULT_CONST.position.center.lng))
 
         setToastStatus("reset") // 화면 초기화 알람 토스트 팝업 처리
     }
