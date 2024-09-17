@@ -34,7 +34,7 @@ const MarkerLayer = () => {
                 return setShowHistList(showList);
             }
         }
-    }, [navInfo, histFetchRes, yearHistFetchRes])
+    }, [navInfo, histFetchRes, yearHistFetchRes, searchWord])
 
     const filterBySearchWord = (originItems: IHistory[]): IHistory[] => {
         return originItems.filter((hist: IHistory) => hist.histNm.includes(searchWord)) as IHistory[];
