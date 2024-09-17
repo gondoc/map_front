@@ -66,6 +66,7 @@ const StToastContentArea = styled.div`
     justify-content: center;
 
     width: auto;
+    min-width: 450px;
     margin: 0 15px;
     height: 54px;
     color: black;

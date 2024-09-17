@@ -47,7 +47,7 @@ const TimelineMarkerLayer = () => {
                 startTimeline();
             }
             const nextItem: IHistory = reversedHistItems[timelineIndex];
-            if (timelineIndex !== TIME_LINE_INIT_INDEX && nextItem) {
+            if ((timelineIndex !== TIME_LINE_INIT_INDEX) && nextItem) {
                 moveNextItem(nextItem);
                 activeNextItem(markerList ? markerList : [], nextItem);
             }
@@ -59,6 +59,8 @@ const TimelineMarkerLayer = () => {
     }, [navInfo.isOpen, timelineIndex, reversedHistItems])
 
     const startTimeline = () => {
+        map.setCenter(new kakao.maps.LatLng(MAP_DEFAULT_CONST.position.center.lat, MAP_DEFAULT_CONST.position.center.lng))
+        map.setLevel(MAP_DEFAULT_CONST.zoomLv.init)
         setToastStatus("activeTimeline");
         setMarkerList(null);
     }
