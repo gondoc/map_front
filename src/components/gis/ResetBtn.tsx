@@ -12,6 +12,8 @@ const ResetBtn = () => {
 
     const {
         resetMapState,
+        setZoomLevel,
+        setMapCenter,
     } = useMapStore();
 
     const resetBtnClickHandler = () => {

@@ -1,3 +1,6 @@
+import gis_poi_active_01 from "../../../../assets/image/gis_poi_active_01.png";
+import gis_poi_default_01 from "../../../../assets/image/gis_poi_default_01.png";
+
 import React, {useEffect, useState} from "react";
 import {IHistory} from "../../../../types/hist.types";
 import {useHistQuery} from "../../../../querys/MapQuery";
@@ -5,14 +8,16 @@ import useViewStore from "../../../../store/viewStore";
 import UseFindCurrentIndex from "../../../../hooks/useFindCurrentIndex";
 import {MapMarker, useMap} from "react-kakao-maps-sdk";
 import {MAP_DEFAULT_CONST, TIME_LINE_INIT_INDEX} from "../../../../config/constant";
+import {useQueryClient} from "@tanstack/react-query";
+import {QueryKeys} from "../../../../querys/QueryKeys";
 
 const TimelineMarkerLayer = () => {
 
+    const qc = useQueryClient();
     const {
         navInfo,
         setNavInfo,
         setToastStatus,
-
     } = useViewStore();
     const map: kakao.maps.Map = useMap();
     const {data: histFetchRes, status: histFetchStatus} = useHistQuery();
@@ -27,7 +32,7 @@ const TimelineMarkerLayer = () => {
 
     useEffect(() => {
         if (histFetchStatus === "success") {
-            const reversedItems: IHistory[] = histFetchRes?.data && histFetchRes?.data?.length > 0 ? [...histFetchRes?.data.reverse()] : [];
+            const reversedItems = qc.getQueryData(QueryKeys.MAP.time()) as IHistory[]
             setReversedHistItems(reversedItems)
         }
 
@@ -38,17 +43,37 @@ const TimelineMarkerLayer = () => {
 
     useEffect(() => {
         if (navInfo.isOpen) {
+            if (timelineIndex === TIME_LINE_INIT_INDEX) {
+                startTimeline();
+            }
             const nextItem: IHistory = reversedHistItems[timelineIndex];
             if (timelineIndex !== TIME_LINE_INIT_INDEX && nextItem) {
                 moveNextItem(nextItem);
                 activeNextItem(markerList ? markerList : [], nextItem);
-                // } else if (timelineIndex === histFetchRes?.data?.length) {
-                //     finishedTimeline();
-            } else {
-                initTimeline();
+            }
+
+            if (timelineIndex === reversedHistItems.length) {
+                endTimeline();
             }
         }
-    }, [navInfo.isOpen, timelineIndex])
+    }, [navInfo.isOpen, timelineIndex, reversedHistItems])
+
+    const startTimeline = () => {
+        setToastStatus("activeTimeline");
+        setMarkerList(null);
+    }
+
+    const endTimeline = () => {
+        setNavInfo({...navInfo, activeHistItem: null})
+        map.panTo(new kakao.maps.LatLng(+MAP_DEFAULT_CONST.position.center.lat, +MAP_DEFAULT_CONST.position.center.lng))
+        setTimeout(() => {
+            map.setLevel(MAP_DEFAULT_CONST.zoomLv.init, {
+                animate: {duration: 500}
+            })
+            setNavInfo({...navInfo, currentNav: "none", activeHistItem: null})
+        }, 1000)
+        setToastStatus("deactivatedTimeline")
+    }
 
     const moveNextItem = (nextItem: IHistory) => {
         map.setLevel(MAP_DEFAULT_CONST.zoomLv.timeline, {
@@ -56,9 +81,6 @@ const TimelineMarkerLayer = () => {
             anchor: new kakao.maps.LatLng(+nextItem.lat, +nextItem.lng)
         })
         map.panTo(new kakao.maps.LatLng(+nextItem.lat, +nextItem.lng))
-
-        // map.setCenter(new kakao.maps.LatLng(+MAP_DEFAULT_CONST.position.center.lat, +MAP_DEFAULT_CONST.position.center.lng))
-        // map.set
     }
 
     const activeNextItem = (markerList: IHistory[], nextItem: IHistory) => {
@@ -69,43 +91,23 @@ const TimelineMarkerLayer = () => {
         }, 600)
     }
 
-    const initTimeline = () => {
-        setNavInfo({...navInfo, activeHistItem: null})
-        map.panTo(new kakao.maps.LatLng(+MAP_DEFAULT_CONST.position.center.lat, +MAP_DEFAULT_CONST.position.center.lng))
-        map.setLevel(MAP_DEFAULT_CONST.zoomLv.init, {
-            animate: {duration: 500}
-        })
-        // setToastStatus("deactivatedTimeline")
-        //
-        // setTimeout(()=> {
-        //     setNavInfo({...navInfo, currentNav: "none", activeHistItem: null})
-        // }, 2000)
-    }
-
-    const finishedTimeline = () => {
-        // map.setCenter(new kakao.maps.LatLng(+MAP_DEFAULT_CONST.position.center.lat, +MAP_DEFAULT_CONST.position.center.lng))
-        setNavInfo({...navInfo, activeHistItem: null})
-        // map.setBounds(map.getBounds())
-        // map.setLevel(MAP_DEFAULT_CONST.zoomLv.init, {animate: {duration: 900}})
-        // setToastStatus("deactivatedTimeline")
-        // setTimeout(() => {
-        //     setNavInfo({...navInfo, currentNav: "none"})
-        // }, 2000)
-    }
-
-
     return (
         <>
             {
                 markerList &&
                 markerList.map((item: IHistory, index: number) => {
+                    const isActive: boolean = item.id === navInfo.activeHistItem?.id;
                     return (<MapMarker
                         key={`MAP_MARKER_KEY_TIMELINE_${item.id}_${index}`}
                         position={{lat: +item.lat, lng: +item.lng}}
                         clickable={true}
                         title={item.categoryContent}
-                        draggable={true}
-                        infoWindowOptions={{zIndex: 0}}
+                        draggable={false}
+                        zIndex={isActive ? 10 : 0}
+                        image={{
+                            src: isActive ? gis_poi_active_01 : gis_poi_default_01,
+                            size: {width: 29, height: 42}
+                        }}
                     />)
                 })
             }
