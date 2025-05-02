@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import {MAP_DEFAULT_CONST} from "../config/constant";
+import {MAP_DEFAULT_CONST} from "@config/constant";
 
 interface IMapStore {
     zoomLevel: number;

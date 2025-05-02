@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, {useEffect, useRef, useState} from "react";
-import useDebounce from "../../../../../../hooks/useDebounce";
-import useViewStore from "../../../../../../store/viewStore";
+import useDebounce from "@hook/useDebounce";
+import useViewStore from "@store/viewStore";
 
 interface IProps {
     isOpen: boolean,
@@ -47,9 +47,7 @@ const SearchArea = (props: IProps) => {
                 ref={el => {
                     return el !== null && el;
                 }}
-                // innerref={inputRef}
-                // innerRef={inputRef}
-                type={"search"}
+                type={"text"}
                 placeholder={"검색"}
                 value={typing}
                 onChange={(e) => setTyping(e.target.value)}
@@ -75,7 +73,7 @@ const StSearchArea = styled.div<{ $isOpen: boolean }>`
 
 const StProjectSearchInput = styled.input`
     border: none;
-    width: 240px;
+    width: 232px;
     margin-top: 3px;
     padding-left: 8px;
     border-radius: 5px;

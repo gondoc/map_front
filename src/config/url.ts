@@ -1,16 +1,16 @@
-import {envConfig} from "./envConfig";
+export const isDev: boolean = process.env.NODE_ENV === "development";
 
-// const port: number = envConfig.MAP_SERVER.PORT as unknown as number;
-// const ctx: string = envConfig.MAP_SERVER.CONTEXT_PATH as unknown as string;
-
-const port: number = 18080;
-const ctx: string = "map";
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+const port: number = import.meta.env.VITE_MAP_SERVER_PORT;
+const ctx: string = isDev ? "/map" : "";
 
 export const URL = {
 
     MAP: {
-        LIST: `http://${window.location.hostname}:${port}/${ctx}/api/hist/items`,
-        YEAR: `http://${window.location.hostname}:${port}/${ctx}/api/hist/year-items`
+        // LIST: `http://${isDev ? window.location.hostname : "spring-backend"}:${port}${ctx}/api/hist/items`,
+        // YEAR: `http://${isDev ? window.location.hostname : "spring-backend"}:${port}${ctx}/api/hist/year-items`
+        LIST: `${baseUrl}/api/hist/items`,
+        YEAR: `${baseUrl}/api/hist/year-items`
     }
 }
 

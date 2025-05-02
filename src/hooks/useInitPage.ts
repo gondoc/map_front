@@ -1,8 +1,8 @@
-import {useHistQuery, useYearHistQuery} from "../querys/MapQuery";
+import {QueryKeys} from "@query/QueryKeys";
+import {useHistQuery, useYearHistQuery} from "@query/MapQuery";
 import {useEffect} from "react";
-import {IHistory} from "../types/hist.types";
+import {IHistory} from "@type/hist.types";
 import {useQueryClient} from "@tanstack/react-query";
-import {QueryKeys} from "../querys/QueryKeys";
 
 const UseInitPage = () => {
 

@@ -1,9 +1,9 @@
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import axios, {AxiosError} from "axios";
-import {QueryKeys} from "./QueryKeys";
-import Url from "../config/url";
-import {IHistory, IYearHistory} from "../types/hist.types";
-import {IResponse} from "../types/common.types";
+import {IResponse} from "@type/common.types";
+import {IHistory, IYearHistory} from "@type/hist.types";
+import {QueryKeys} from "@query/QueryKeys";
+import Url from "@config/url";
 
 export const useHistQuery = (): UseQueryResult<IResponse<IHistory[]>, AxiosError> => {
     return useQuery({

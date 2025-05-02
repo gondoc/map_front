@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import ProjectNavItem from "./navItem/projects/ProjectNavItem";
-import YearNavItem from "./navItem/year/YearNavItem";
-import TimeLineNavItem from "./navItem/timeLine/TimeLineNavItem";
+import ProjectNavItem from "@component/common/nav/navItem/projects/ProjectNavItem";
+import YearNavItem from "@component/common/nav/navItem/year/YearNavItem";
+import TimeLineNavItem from "@component/common/nav/navItem/timeLine/TimeLineNavItem";
 
 const NavArea = () => {
 
@@ -24,7 +24,7 @@ const NavAreaWrapper = styled.nav`
     align-items: center;
     height: 100%;
     left: 0;
-    z-index: 10;
+    z-index: 1;
     background: #F7FBFC;
 `
 

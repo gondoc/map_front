@@ -8,8 +8,6 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -17,16 +15,37 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
     "noEmit": true,
     "jsx": "react-jsx",
+//    "baseUrl": ".",
+    "baseUrl": "./src/",
+    "paths": {
+      "@css/*": ["assets/css/*"],
+      "@image/*": ["assets/image/*"],
+      "@component/*": ["components/*"],
+      "@hook/*": ["hooks/*"],
+      "@query/*": ["querys/*"],
+      "@store/*": ["store/*"],
+      "@type/*": ["types/*"],
+      "@page/*": ["page/*"],
+      "@config/*": ["config/*"],
+    },
     "types": [
       "kakao.maps.d.ts",
     ],
     "typeRoots": [
+      "./node_modules/@types",
       "./src/types",
     ]
   },
   "include": [
-    "src"
-  ]
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "vite.config.ts",
+    "vite-env.d.ts",
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

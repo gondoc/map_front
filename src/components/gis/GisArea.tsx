@@ -1,16 +1,14 @@
-import 'leaflet/dist/leaflet.css';
-import useMapStore from "../../store/mapStore";
+import useMapStore from "@store/mapStore";
 import styled from "styled-components";
 import {Map, MapTypeControl, useKakaoLoader, ZoomControl} from "react-kakao-maps-sdk";
-import {envConfig} from "../../config/envConfig";
 import React, {useEffect, useState} from "react";
-import {IMapCenter} from "../../types/map.types";
-import {MAP_DEFAULT_CONST} from "../../config/constant";
-import useViewStore from "../../store/viewStore";
-import ResetBtn from "./ResetBtn";
-import MarkerLayer from "./layer/marker/MarkerLayer";
-import MarkerPopupLayer from "./layer/popup/MarkerPopupLayer";
-import TimelineMarkerLayer from "./layer/marker/TimelineMarkerLayer";
+import {IMapCenter} from "@type/map.types";
+import {MAP_DEFAULT_CONST} from "@config/constant";
+import useViewStore from "@store/viewStore";
+import MarkerLayer from "@component/gis/layer/marker/MarkerLayer";
+import TimelineMarkerLayer from "@component/gis/layer/marker/TimelineMarkerLayer";
+import MarkerPopupLayer from "@component/gis/layer/popup/MarkerPopupLayer";
+import ResetBtn from "@component/gis/ResetBtn";
 
 const GisArea = () => {
 
@@ -23,10 +21,7 @@ const GisArea = () => {
         navInfo,
     } = useViewStore();
 
-    const [loading, error] = useKakaoLoader({
-        appkey: envConfig.API_KAKAO_JS_KEY as string, // 발급 받은 APPKEY
-
-    });
+    useKakaoLoader({appkey: `${import.meta.env.VITE_REACT_APP_KAKAO_JS_KEY}`});
 
     const [position, setPosition] = useState<IMapCenter>(MAP_DEFAULT_CONST.position);
 

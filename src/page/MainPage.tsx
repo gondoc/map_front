@@ -1,15 +1,18 @@
-import TopBar from "../components/common/TopBar";
-import NavArea from "../components/common/nav/NavArea";
-import GisArea from "../components/gis/GisArea";
-import UseInitPage from "../hooks/useInitPage";
-import ToastArea from "../components/common/toast/ToastArea";
+import UseInitPage from "@hook/useInitPage";
+import NavArea from "@component/common/nav/NavArea";
+import GisArea from "@component/gis/GisArea";
+import ToastArea from "@component/common/toast/ToastArea";
+import NotDisplayToday from "@component/notice/NotDisplayToday";
+import TopBar from "@component/common/TopBar";
 
-const MainPage = ()=> {
+const MainPage = () => {
 
     UseInitPage();
 
     return (
         <div className={"wrap"}>
+            {/*안내*/}
+            <NotDisplayToday/>
             {/*탑바 영역*/}
             <TopBar/>
             {/*네비게이션 바*/}

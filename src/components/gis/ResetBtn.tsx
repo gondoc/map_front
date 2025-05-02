@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import useViewStore from "../../store/viewStore";
-import useMapStore from "../../store/mapStore";
+import useViewStore from "@store/viewStore";
 import {useMap} from "react-kakao-maps-sdk";
-import {MAP_DEFAULT_CONST} from "../../config/constant";
+import {MAP_DEFAULT_CONST} from "@config/constant";
 
 const ResetBtn = () => {
 
@@ -46,7 +45,7 @@ const StResetBtnArea = styled.div`
     justify-content: center;
     width: 94px;
     height: 34px;
-    z-index: 10;
+    z-index: 1;
     border-radius: 8px;
     border: 3px solid #769FCD;
 

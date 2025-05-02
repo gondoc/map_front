@@ -2,13 +2,14 @@
   "name": "map_front",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "homepage": "main",
   "dependencies": {
     "@tanstack/react-query": "^5.52.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.106",
     "@types/proj4leaflet": "^1.0.10",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
@@ -19,18 +20,20 @@
     "react-dom": "^18.3.1",
     "react-kakao-maps-sdk": "^1.1.27",
     "react-leaflet": "^4.2.1",
-    "react-router-dom": "^6.26.1",
+    "react-router-dom": "^7.5.1",
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.12",
     "typescript": "^4.9.5",
+    "vite-tsconfig-paths": "^5.1.4",
     "web-vitals": "^2.1.4",
     "zustand": "^4.5.5"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "NODE_ENV=development vite",
+    "build": "NODE_ENV=production tsc --noEmit --skipLibCheck && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "prod": "NODE_ENV=production vite --host"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +54,12 @@
     ]
   },
   "devDependencies": {
-    "@types/leaflet": "^1.9.12"
+    "@types/fs-extra": "^11.0.4",
+    "@types/leaflet": "^1.9.12",
+    "@types/node": "^18.19.86",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.2.1",
+    "babel-plugin-styled-components": "^2.1.4",
+    "vite": "^5.4.18"
   }
 }

@@ -1,11 +1,11 @@
-import gis_poi_active_01 from "../../../../assets/image/gis_poi_active_01.png";
-import gis_poi_default_01 from "../../../../assets/image/gis_poi_default_01.png";
+import gis_poi_active_01 from "@image/gis_poi_active_01.png";
+import gis_poi_default_01 from "@image/gis_poi_default_01.png";
 
-import {IHistory, IYearHistory} from "../../../../types/hist.types";
 import {MapMarker} from "react-kakao-maps-sdk";
 import React, {useEffect, useState} from "react";
-import useViewStore from "../../../../store/viewStore";
-import {useHistQuery, useYearHistQuery} from "../../../../querys/MapQuery";
+import useViewStore from "@store/viewStore";
+import {useHistQuery, useYearHistQuery} from "@query/MapQuery";
+import {IHistory, IYearHistory} from "@type/hist.types";
 
 const MarkerLayer = () => {
 

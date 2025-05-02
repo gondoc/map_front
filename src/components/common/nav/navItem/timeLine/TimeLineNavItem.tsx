@@ -1,6 +1,6 @@
-import useViewStore from "../../../../../store/viewStore";
-import {TitleType} from "../../../../../types/common.types";
-import {StItemArea, StTitle} from "../projects/ProjectNavItem";
+import useViewStore from "@store/viewStore";
+import {TitleType} from "@type/common.types";
+import {StItemArea, StTitle} from "@component/common/nav/navItem/projects/ProjectNavItem";
 
 interface IProps {
     title: TitleType,

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {IHistory} from "../../../../../../types/hist.types";
-import useViewStore from "../../../../../../store/viewStore";
+import {IHistory} from "@type/hist.types";
+import useViewStore from "@store/viewStore";
 
 interface IProps {
     items: IHistory[],

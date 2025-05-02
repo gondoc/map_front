@@ -18,6 +18,6 @@ const TopBarWrapper = styled.div`
     width: 100%;
     font-weight: 500;
     font-size: large;
-    z-index: 10;
+    z-index: 1;
     background-color: #D6E6F2;
 `

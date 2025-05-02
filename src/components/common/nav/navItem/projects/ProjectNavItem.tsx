@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import useViewStore from "../../../../../store/viewStore";
-import {TitleType} from "../../../../../types/common.types";
+import useViewStore from "@store/viewStore";
+import {TitleType} from "@type/common.types";
 import {useEffect, useState} from "react";
-import HistList from "./histList/HistList";
-import {IHistory} from "../../../../../types/hist.types";
-import {useHistQuery} from "../../../../../querys/MapQuery";
-import SearchArea from "./search/SearchArea";
+import HistList from "@component/common/nav/navItem/projects/histList/HistList";
+import SearchArea from "@component/common/nav/navItem/projects/search/SearchArea";
+import {IHistory} from "@type/hist.types";
+import {useHistQuery} from "@query/MapQuery";
 
 interface IProps {
     title: TitleType,

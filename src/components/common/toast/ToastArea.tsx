@@ -1,8 +1,8 @@
-import useViewStore from "../../../store/viewStore";
+import useViewStore from "@store/viewStore";
 import {useEffect, useState} from "react";
 import styled from "styled-components";
-import {TOAST_CONTENT} from "../../../config/constant";
-import {ToastStatusType} from "../../../types/common.types";
+import {ToastStatusType} from "@type/common.types";
+import {TOAST_CONTENT} from "@config/constant";
 
 const ToastArea = () => {
 
@@ -84,7 +84,7 @@ const StToastArea = styled.div`
     justify-content: center;
     position: absolute;
     top: 73px;
-    z-index: 10;
+    z-index: 1;
     border-radius: 8px;
     border: 3px solid #769FCD;
     background-color: #F7FBFC;

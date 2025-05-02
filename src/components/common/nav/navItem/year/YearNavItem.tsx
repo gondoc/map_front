@@ -1,11 +1,10 @@
-import styled from "styled-components";
-import useViewStore from "../../../../../store/viewStore";
-import {TitleType} from "../../../../../types/common.types";
-import YearList from "./yearList/YearList";
-import {useYearHistQuery} from "../../../../../querys/MapQuery";
+import useViewStore from "@store/viewStore";
+import {TitleType} from "@type/common.types";
+import {IYearHistory} from "@type/hist.types";
+import YearList from "@component/common/nav/navItem/year/yearList/YearList";
+import {useYearHistQuery} from "@query/MapQuery";
 import {useEffect, useState} from "react";
-import {IYearHistory} from "../../../../../types/hist.types";
-import {StItemArea, StTitle} from "../projects/ProjectNavItem";
+import {StItemArea, StTitle} from "@component/common/nav/navItem/projects/ProjectNavItem";
 
 interface IProps {
     title: TitleType,

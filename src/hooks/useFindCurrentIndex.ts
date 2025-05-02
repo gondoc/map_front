@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {TIME_LINE_INIT_INDEX} from "../config/constant";
+import {TIME_LINE_INIT_INDEX} from "@config/constant";
 
 interface IProps {
     isActive: boolean,

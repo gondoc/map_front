@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import {IHistory} from "../../../../types/hist.types";
 import {useEffect} from "react";
-import useMapStore from "../../../../store/mapStore";
-import {CustomOverlayMap, MapInfoWindow, useMap} from "react-kakao-maps-sdk";
-import {MAP_DEFAULT_CONST} from "../../../../config/constant";
-import useViewStore from "../../../../store/viewStore";
+import {CustomOverlayMap, useMap} from "react-kakao-maps-sdk";
+import {IHistory} from "@type/hist.types";
+import useViewStore from "@store/viewStore";
 
 interface IProps {
     history: IHistory
@@ -75,7 +73,7 @@ const MarkerPopupArea = styled.div<{ $isShow: boolean }>`
     width: 367px;
     height: min-content;
     color: black;
-    z-index: 10;
+    z-index: 1;
     gap: 3px;
     transition: all 550ms;
     opacity: ${({$isShow}) => $isShow ? '1' : '0'};

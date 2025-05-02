@@ -1,7 +1,7 @@
-import MarkerPopup from "./MarkerPopup";
-import {IHistory} from "../../../../types/hist.types";
 import React from "react";
-import useViewStore from "../../../../store/viewStore";
+import useViewStore from "@store/viewStore";
+import {IHistory} from "@type/hist.types";
+import MarkerPopup from "@component/gis/layer/popup/MarkerPopup";
 
 const MarkerPopupLayer = (props: { activeHistItem: IHistory | null }) => {
 

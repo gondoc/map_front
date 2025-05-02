@@ -1,6 +1,6 @@
 import {create} from "zustand";
-import {INavInfo, TitleType, ToastStatusType} from "../types/common.types";
-import {INIT_SNB_INFO} from "../config/constant";
+import {INavInfo, ToastStatusType} from "@type/common.types";
+import {INIT_SNB_INFO} from "@config/constant";
 
 interface IViewStore {
     navInfo: INavInfo,

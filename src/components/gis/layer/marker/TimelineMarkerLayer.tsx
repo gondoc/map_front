@@ -1,15 +1,15 @@
-import gis_poi_active_01 from "../../../../assets/image/gis_poi_active_01.png";
-import gis_poi_default_01 from "../../../../assets/image/gis_poi_default_01.png";
+import gis_poi_active_01 from "@image/gis_poi_active_01.png";
+import gis_poi_default_01 from "@image/gis_poi_default_01.png";
 
 import React, {useEffect, useState} from "react";
-import {IHistory} from "../../../../types/hist.types";
-import {useHistQuery} from "../../../../querys/MapQuery";
-import useViewStore from "../../../../store/viewStore";
-import UseFindCurrentIndex from "../../../../hooks/useFindCurrentIndex";
 import {MapMarker, useMap} from "react-kakao-maps-sdk";
-import {MAP_DEFAULT_CONST, TIME_LINE_INIT_INDEX} from "../../../../config/constant";
+import {MAP_DEFAULT_CONST, TIME_LINE_INIT_INDEX} from "@config/constant";
 import {useQueryClient} from "@tanstack/react-query";
-import {QueryKeys} from "../../../../querys/QueryKeys";
+import {QueryKeys} from "@query/QueryKeys";
+import {IHistory} from "@type/hist.types";
+import useViewStore from "@store/viewStore";
+import {useHistQuery} from "@query/MapQuery";
+import UseFindCurrentIndex from "@hook/useFindCurrentIndex";
 
 const TimelineMarkerLayer = () => {
 
@@ -20,29 +20,30 @@ const TimelineMarkerLayer = () => {
         setToastStatus,
     } = useViewStore();
     const map: kakao.maps.Map = useMap();
-    const {data: histFetchRes, status: histFetchStatus} = useHistQuery();
+    const {data: histFetchRes, isSuccess} = useHistQuery();
 
     const timelineIndex: number = UseFindCurrentIndex({
         isActive: navInfo.currentNav === "timeline" && navInfo.isOpen,
-        lastIndex: histFetchStatus === "success" ? histFetchRes?.data?.length : 0
+        lastIndex: isSuccess ? histFetchRes?.data?.length : 0
     });
 
     const [reversedHistItems, setReversedHistItems] = useState<IHistory[]>([])
     const [markerList, setMarkerList] = useState<IHistory[] | null>(null)
 
     useEffect(() => {
-        if (histFetchStatus === "success") {
+        if (isSuccess) {
             const reversedItems = qc.getQueryData(QueryKeys.MAP.time()) as IHistory[]
+            console.log('reversedItems', reversedItems)
             setReversedHistItems(reversedItems)
         }
 
         return (() => {
             setReversedHistItems([])
         })
-    }, [histFetchRes, histFetchStatus])
+    }, [histFetchRes, isSuccess])
 
     useEffect(() => {
-        if (navInfo.isOpen) {
+        if (navInfo.currentNav === "timeline" && navInfo.isOpen && reversedHistItems && reversedHistItems?.length > 0) {
             if (timelineIndex === TIME_LINE_INIT_INDEX) {
                 startTimeline();
             }

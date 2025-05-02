@@ -1,7 +1,7 @@
-import {IYearHistory} from "../../../../../../types/hist.types";
-import useViewStore from "../../../../../../store/viewStore";
+import {IYearHistory} from "@type/hist.types";
+import useViewStore from "@store/viewStore";
 import styled from "styled-components";
-import HistList, {StNavSubItemArea} from "../../projects/histList/HistList";
+import HistList from "@component/common/nav/navItem/projects/histList/HistList";
 
 interface IProps {
     isOpen: boolean
@@ -49,15 +49,6 @@ const YearList = (props: IProps) => {
                     )
                 })
             }
-            {/*{*/}
-            {/*    <HistList*/}
-            {/*        items={it.histRecords}*/}
-            {/*        isOpen={*/}
-            {/*            navInfo.currentNav === "year" &&*/}
-            {/*            navInfo.year?.activeYear === it.yearLabel*/}
-            {/*        }*/}
-            {/*    />*/}
-            {/*}*/}
         </StYearListArea>
     )
 }
@@ -77,7 +68,6 @@ const StYearListArea = styled.div<{ $isOpen: boolean }>`
     visibility: ${({$isOpen}) => $isOpen ? 'visible' : 'hidden'};
 
 `
-    // height: ${({$isOpen, $itemSize}) => $isOpen ? `calc(${$itemSize}*23px)` : '0'};
 
 const StYearSubArea = styled.div<{ $isOpen: boolean, $itemSize: number }>`
     display: contents;
@@ -85,7 +75,7 @@ const StYearSubArea = styled.div<{ $isOpen: boolean, $itemSize: number }>`
     align-items: center;
     transition: all 250ms;
 
-    height: ${({$isOpen, $itemSize}) => $isOpen ? "max-content"  : '0'};
+    height: ${({$isOpen, $itemSize}) => $isOpen ? "max-content" : '0'};
     opacity: ${({$isOpen}) => $isOpen ? '1' : '0'};
     visibility: ${({$isOpen}) => $isOpen ? 'visible' : 'hidden'};
 `
