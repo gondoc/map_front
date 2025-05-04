@@ -17,6 +17,18 @@ input {
     font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+a {
+    /*text-decoration: none;*/
+
+    &:visited {
+        color: black;
+    }
+}
+
+a::after {
+    content: "🔗"
+}
+
 .wrap {
     display: flex;
     flex-wrap: wrap;
@@ -117,6 +129,6 @@ input {
 }
 
 [type="checkbox"]:checked {
-    border-color: #769FCD;
-    background-color: #4C5580;
+    border-color: #4C5580;
+    background-color: #769FCD;
 }

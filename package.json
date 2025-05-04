@@ -14,6 +14,7 @@
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.7",
+    "dayjs": "^1.11.13",
     "node": "^20.9.0",
     "proj4leaflet": "^1.0.2",
     "react": "^18.3.1",
