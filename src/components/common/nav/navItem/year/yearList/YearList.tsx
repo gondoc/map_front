@@ -99,7 +99,7 @@ const StYearLabelArea = styled.div<{ $isActive: boolean }>`
     color: ${(props) => props.$isActive ? "#FFFFFF" : "black"};
 
     &:hover {
-        background-color: ${(props) => props.$isActive ? "#769FCD" : "#B9D7EA"};;
+        background-color: ${(props) => props.$isActive ? "#769FCD" : "#B9D7EA"};
     }
 
     &:active {

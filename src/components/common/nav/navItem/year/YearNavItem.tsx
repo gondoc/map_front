@@ -1,9 +1,8 @@
 import useViewStore from "@store/viewStore";
 import {TitleType} from "@type/common.types";
-import {IYearHistory} from "@type/hist.types";
 import YearList from "@component/common/nav/navItem/year/yearList/YearList";
 import {useYearHistQuery} from "@query/MapQuery";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {StItemArea, StTitle} from "@component/common/nav/navItem/projects/ProjectNavItem";
 
 interface IProps {
@@ -18,17 +17,12 @@ const YearNavItem = (props: IProps) => {
     } = useViewStore();
 
     const {data: yearHistRes, isSuccess} = useYearHistQuery();
-    const [yearHistItems, setYearHistItems] = useState<IYearHistory[]>([]);
 
     useEffect(() => {
-        if (isSuccess) {
-            yearHistRes?.data && yearHistRes?.data?.length > 0 && setYearHistItems(yearHistRes.data);
-        }
-
         return (() => {
             setNavInfo({...navInfo, currentNav: "none", isOpen: false, activeHistItem: null})
         })
-    }, [yearHistRes])
+    }, [])
 
     const navItemClickHandler = (clickedTitle: TitleType) => {
         if (clickedTitle === navInfo.currentNav) {
@@ -48,7 +42,7 @@ const YearNavItem = (props: IProps) => {
             </StItemArea>
             <YearList
                 isOpen={navInfo.currentNav === "year" && navInfo.isOpen}
-                items={yearHistItems}
+                items={isSuccess ? yearHistRes?.data : []}
             />
         </>
     )

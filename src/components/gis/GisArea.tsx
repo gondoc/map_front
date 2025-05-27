@@ -40,13 +40,15 @@ const GisArea = () => {
                     isPanto={true}
                     disableDoubleClick={false}
                     level={zoomLevel}
-                    style={{width: '100%', height: '100%', top: "48px"}}
+                    style={{width: '100%', height: '100%'}}
                     minLevel={12}
                 >
                     <ResetBtn/>
 
-                    <MapTypeControl position={"TOPRIGHT"}/>
-                    <ZoomControl position={"RIGHT"}/>
+                    <StyledControlArea>
+                        <MapTypeControl/>
+                        <ZoomControl/>
+                    </StyledControlArea>
                     {navInfo.currentNav !== "timeline" ? <MarkerLayer/> : <TimelineMarkerLayer/>}
                     <MarkerPopupLayer activeHistItem={navInfo?.activeHistItem}/>
                 </Map>
@@ -59,7 +61,7 @@ export default GisArea
 
 const StyledGisMapArea = styled.div`
     position: absolute;
-    top: 0;
+    top: 70px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -67,3 +69,8 @@ const StyledGisMapArea = styled.div`
     z-index: 0;
 `
 
+const StyledControlArea = styled.div`
+    position: absolute;
+    display: flex;
+    top: 10px;
+`

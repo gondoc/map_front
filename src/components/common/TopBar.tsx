@@ -9,15 +9,15 @@ const TopBar = () => {
 
 export default TopBar
 
-const TopBarWrapper = styled.div`
+const TopBarWrapper = styled.h2`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 48px;
+    height: 70px;
     top: 0;
     width: 100%;
     font-weight: 500;
-    font-size: large;
+    margin: 0;
     z-index: 1;
     background-color: #D6E6F2;
 `

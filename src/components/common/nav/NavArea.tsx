@@ -36,3 +36,23 @@ const StNavItemArea = styled.div`
     width: 260px;
     height: auto;
 `
+
+const ContactArea = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+
+    background-color: #769FCD;
+    row-gap: 13px;
+`
+
+const IconArea = styled.div`
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4C5580;
+`

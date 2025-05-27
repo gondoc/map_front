@@ -48,19 +48,22 @@ const NotDisplayToday = () => {
                     간단하게 <a target={"_blank"} rel={"noopener noreferrer"}
                             href={"https://react-kakao-maps-sdk.jaeseokim.dev/"}>react-kakao-maps.sdk</a> 로 전국 프로젝트 수행 지도화 웹사이트를 만들어봤습니다.<br/>
                     <br/>
-                    현재 근무 중인 회사는 주로 공공기관과 지방자치단체를 대상으로 B2B 사업을 하고 있습니다.<br/>
-                    업무 특성상 전국 지방자치단체 및 시·군·구의 현장을 방문하여 솔루션 개발, 운영, 유지보수 업무를 수행하는 경우가 있습니다.<br/>
-                    이에 따라 전국에서 수행한 프로젝트들을 지도에 기록으로 남기고 싶다는 생각이 들어 해당 작업을 진행하게 되었습니다.<br/>
+                    현재 근무 중인 회사는 주로 B2G 사업을 하고 있습니다. 업무 특성상 전국 지방자치단체 및 시·군·구의 <br/>
+                    현장을 방문하여 솔루션 개발, 운영, 유지보수 업무를 수행하는 경우가 있습니다.<br/>
+                    이에 따라, 전국에서 수행한 프로젝트들을 지도에 기록으로 남기고 싶다는 생각이 들어<br/>
+                    해당 작업을 진행하게 되었습니다.<br/>
                     <br/>
-                    Career Map 프로젝트는 React 모듈과 Spring Boot 모듈로 분리되어 있습니다.<br/>
+                    Career Map 은 React 모듈과 Spring Boot 모듈로서 구성되어 있습니다.<br/>
                     React 에는 Kakao 지도를 적용하였고, 상태 관리는 Zustand 를 활용하였습니다.<br/>
                     서버와의 데이터 통신은 React Query 를 통해 처리하였습니다.<br/>
                     <br/>
-                    서버는 Java 와 Spring Boot 기반이며, MVC 패턴 구조를 따르고 있습니다.<br/>
-                    ORM 은 JPA 와 Querydsl 을 혼용하여 사용하였습니다.<br/>
-                    각 모듈은 Docker 컨테이너로 구성하였고, AWS 환경에서 클라우드 기반으로 동작하도록 설정하였습니다.<br/>
+                    서버는 Spring Boot 프레임워크를 사용하였고 Java 로 코드를 작성했습니다.<br/>
+                    ORM 은 JPA 와 Querydsl 을 혼용하여 사용하였고, DB 는 Postgresql 을 사용했습니다.<br/>
+                    데이터베이스와 서버, 프론트 각 모듈은 Docker 컨테이너로 구성하였습니다.<br/>
+                    AWS 클라우드 기반으로 동작하도록 설정하였습니다.<br/>
                     <br/>
-                    방문해주셔서 감사합니다.
+                    본 사이트는 1920 * 1080 (FHD) 를 기준으로 개발되었습니다.<br/>
+                    방문해주셔서 감사합니다.<br/>
                 </PopupBody>
 
                 <PopupFooter>
@@ -152,6 +155,7 @@ const CloseBtn = styled.button`
 
 const PopupBody = styled.div`
     padding: 5px 8px;
+    white-space: pre-line;
 `
 
 const PopupFooter = styled.div`

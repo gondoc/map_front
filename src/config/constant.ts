@@ -1,7 +1,7 @@
 import {INavInfo} from "@type/common.types";
 
 export const MAP_DEFAULT_CONST = {
-    position: {center: {lat: 36.514217, lng: 127.602323}}, // initialize load default crdnt
+    position: {center: {lat: 36.154217, lng: 127.602323}}, // initialize load default crdnt
     zoomLv: {
         init: 12,
         active: 10,

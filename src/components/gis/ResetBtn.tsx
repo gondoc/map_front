@@ -39,7 +39,7 @@ export default ResetBtn
 const StResetBtnArea = styled.div`
     position: absolute;
     display: flex;
-    top: 59px;
+    top: 10px;
     left: 270px;
     align-items: center;
     justify-content: center;
