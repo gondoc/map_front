@@ -8,6 +8,7 @@ export interface IHistory {
     lat: string,
     lng: string,
     logoImgPath: string,
+    siteId: string,
     siteNm: string,
     staffCnt: number
 }

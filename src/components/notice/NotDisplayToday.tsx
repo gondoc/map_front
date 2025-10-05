@@ -48,10 +48,11 @@ const NotDisplayToday = () => {
                     간단하게 <a target={"_blank"} rel={"noopener noreferrer"}
                             href={"https://react-kakao-maps-sdk.jaeseokim.dev/"}>react-kakao-maps.sdk</a> 로 전국 프로젝트 수행 지도화 웹사이트를 만들어봤습니다.<br/>
                     <br/>
-                    현재 근무 중인 회사는 주로 B2G 사업을 하고 있습니다. 업무 특성상 전국 지방자치단체 및 시·군·구의 <br/>
-                    현장을 방문하여 솔루션 개발, 운영, 유지보수 업무를 수행하는 경우가 있습니다.<br/>
-                    이에 따라, 전국에서 수행한 프로젝트들을 지도에 기록으로 남기고 싶다는 생각이 들어<br/>
-                    해당 작업을 진행하게 되었습니다.<br/>
+                    현재 근무 중인 회사는 주로 B2G, B2B 사업을 하고 있습니다. 업무 특성상 전국 지방자치단체 <br/>
+                    및 시·군·구의 현장을 방문하여 솔루션 개발, 운영, 유지보수 업무를 수행하는 경우가 있습니다.<br/>
+                    <br/>
+                    전국에서 수행한 프로젝트들을 지도에 기록으로 남기고 싶다는 생각이 들어<br/>
+                    커리어맵 웹 사이트를 개발하게 되었습니다.<br/>
                     <br/>
                     Career Map 은 React 모듈과 Spring Boot 모듈로서 구성되어 있습니다.<br/>
                     React 에는 Kakao 지도를 적용하였고, 상태 관리는 Zustand 를 활용하였습니다.<br/>
@@ -64,6 +65,8 @@ const NotDisplayToday = () => {
                     <br/>
                     본 사이트는 1920 * 1080 (FHD) 를 기준으로 개발되었습니다.<br/>
                     방문해주셔서 감사합니다.<br/>
+                    <br/>
+                    + 관리자용 백오피스를 개발하고 있습니다. 우상단의 'Admin Page' 버튼으로 진입이 가능합니다.<br/>
                 </PopupBody>
 
                 <PopupFooter>
@@ -122,9 +125,9 @@ const PopupArea = styled.div`
 
 const PopupHeader = styled.div`
     width: auto;
-    height: 30px;
+    height: 40px;
     display: flex;
-    padding: 0 5px;
+    padding: 0 10px;
     align-items: center;
     justify-content: space-between;
     background-color: #D6E6F2;
@@ -156,10 +159,11 @@ const CloseBtn = styled.button`
 const PopupBody = styled.div`
     padding: 5px 8px;
     white-space: pre-line;
+    min-height: 400px;
 `
 
 const PopupFooter = styled.div`
-    height: 20px;
+    height: 30px;
     background-color: #D6E6F2;
     display: flex;
     align-items: center;

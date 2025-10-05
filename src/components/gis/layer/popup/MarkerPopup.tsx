@@ -1,8 +1,11 @@
 import styled from "styled-components";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {CustomOverlayMap, useMap} from "react-kakao-maps-sdk";
 import {IHistory} from "@type/hist.types";
 import useViewStore from "@store/viewStore";
+
+import no_image from "@image/no_image.png";
+import Url from "@config/url";
 
 interface IProps {
     history: IHistory
@@ -11,6 +14,8 @@ interface IProps {
 const MarkerPopup = (props: IProps) => {
 
     const map: kakao.maps.Map = useMap();
+
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
     const {
         navInfo
@@ -22,6 +27,12 @@ const MarkerPopup = (props: IProps) => {
             map.panTo(new kakao.maps.LatLng(+props.history.lat, +props.history.lng))
         }
     }, [navInfo])
+
+    useEffect(() => {
+        if (props.history) {
+            setPreviewUrl(Url.IMAGE(props.history.siteId, props.history.logoImgPath))
+        }
+    }, [props.history])
 
     const activateWheelScroll = () => {
         return map.setZoomable(true);
@@ -43,6 +54,11 @@ const MarkerPopup = (props: IProps) => {
                 yAnchor={0.15}
                 zIndex={10}
             >
+                <PreviewImage>
+                    <img src={previewUrl ? previewUrl : no_image}
+                         onError={() => setPreviewUrl(no_image)}
+                         alt={props.history.histNm}/>
+                </PreviewImage>
                 <MarkerPopupArea $isShow={navInfo?.activeHistItem?.id === props?.history?.id}>
                     <PopupTitle>
                         프로젝트 명 : {props?.history?.histNm}
@@ -64,6 +80,21 @@ const MarkerPopup = (props: IProps) => {
 
 
 export default MarkerPopup
+
+const PreviewImage = styled.div`
+    display: flex;
+    width: 367px;
+    height: 100px;
+    justify-content: center;
+    border-radius: 8px;
+    background-color: #F7FBFC;
+    border: 3px solid #769FCD;
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+`
 
 const MarkerPopupArea = styled.div<{ $isShow: boolean }>`
     display: flex;
