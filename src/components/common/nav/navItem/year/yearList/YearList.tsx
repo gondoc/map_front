@@ -27,7 +27,8 @@ const YearList = (props: IProps) => {
             $isOpen={props.isOpen}
         >
             {
-                props.items.map((it: IYearHistory) => {
+                props?.items &&
+                props?.items.map((it: IYearHistory) => {
                     return (
                         <StYearSubArea
                             key={`YEAR_HIST_ITEMS_KEY_${it.yearLabel}`}

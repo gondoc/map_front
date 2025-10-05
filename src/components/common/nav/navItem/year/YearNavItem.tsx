@@ -42,7 +42,7 @@ const YearNavItem = (props: IProps) => {
             </StItemArea>
             <YearList
                 isOpen={navInfo.currentNav === "year" && navInfo.isOpen}
-                items={isSuccess ? yearHistRes?.data : []}
+                items={isSuccess ? yearHistRes : []}
             />
         </>
     )

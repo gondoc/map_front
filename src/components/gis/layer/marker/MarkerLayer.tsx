@@ -23,12 +23,12 @@ const MarkerLayer = () => {
     useEffect(() => {
         if (navInfo.currentNav !== "year") {
             if (histFetchStatus === "success") {
-                const showList: IHistory[] = filterBySearchWord(histFetchRes.data);
+                const showList: IHistory[] = filterBySearchWord(histFetchRes);
                 return setShowHistList(showList);
             }
         } else {
             if (yearHistFetchStatus === "success" && navInfo?.year?.activeYear) {
-                const showList: IHistory[] = yearHistFetchRes?.data
+                const showList: IHistory[] = yearHistFetchRes
                     .find((yearHist: IYearHistory) => yearHist.yearLabel === navInfo.year?.activeYear)
                     ?.histRecords as IHistory[];
                 return setShowHistList(showList);

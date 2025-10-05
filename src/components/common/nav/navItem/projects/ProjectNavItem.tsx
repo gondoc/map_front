@@ -35,7 +35,7 @@ const ProjectNavItem = (props: IProps) => {
 
     useEffect(() => {
         if (histFetchStatus === "success") {
-            histFetchRes?.data && histFetchRes?.data?.length > 0 && setProjectItems(histFetchRes.data);
+            histFetchRes && histFetchRes?.length > 0 && setProjectItems(histFetchRes);
         }
 
         if (histFetchStatus === "error") {

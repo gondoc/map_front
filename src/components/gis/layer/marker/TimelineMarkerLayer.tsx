@@ -24,7 +24,7 @@ const TimelineMarkerLayer = () => {
 
     const timelineIndex: number = UseFindCurrentIndex({
         isActive: navInfo.currentNav === "timeline" && navInfo.isOpen,
-        lastIndex: isSuccess ? histFetchRes?.data?.length : 0
+        lastIndex: isSuccess ? histFetchRes?.length : 0
     });
 
     const [reversedHistItems, setReversedHistItems] = useState<IHistory[]>([])
