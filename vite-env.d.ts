@@ -3,6 +3,7 @@ interface ImportMetaEnv {
     readonly VITE_MAP_SERVER_CONTEXT_PATH: string;
     readonly VITE_MAP_SERVER_PORT: number;
     readonly VITE_API_BASE_URL: string
+    readonly VITE_BACK_OFFICE_PORT: number;
 }
 
 interface ImportMeta {

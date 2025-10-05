@@ -7,6 +7,8 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd(), '');
 
+    const DOMAIN: string = env.VITE_SERVER_DOMAIN;
+
     return {
         // vite config
         define: {
@@ -15,8 +17,9 @@ export default defineConfig(({mode}) => {
             MAP_SERVER_CONTEXT_PATH: JSON.stringify(env.APP_ENV),
             MAP_SERVER_PORT: JSON.stringify(env.APP_ENV),
         },
-        base: process.env.NODE_ENV === "development" ? "/" : '/main',
+        base: "/main/",
         server: {
+            allowedHosts: [DOMAIN],
             cors: {
                 credentials: true
             },
@@ -74,7 +77,7 @@ export default defineConfig(({mode}) => {
                     entryFileNames: "assets/js/[name]-[hash].js",
                 }
             },
-            outDir: '../src/main/resources/static', // Spring Boot의 정적 리소스 디렉토리
+            outDir: './dist', // 컨테이너환경에서는 ./dist 로 변경
             assetsDir: 'assets',
             emptyOutDir: true,
             assetsInlineLimit: 0,
