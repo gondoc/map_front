@@ -12,7 +12,7 @@ const UseInitPage = () => {
 
     useEffect(() => {
         histItemsFetch().then(({data}) => {
-            const histItems: IHistory[] = data?.data && data?.data.length > 0 ? data?.data : [];
+            const histItems: IHistory[] = data && data.length > 0 ? data : [];
             qc.setQueryData(QueryKeys.MAP.list(), histItems);
             qc.setQueryData(QueryKeys.MAP.time(), Array.from(histItems).reverse())
             console.log("history init fetch success !! ")
