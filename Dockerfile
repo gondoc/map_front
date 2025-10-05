@@ -1,22 +1,31 @@
-# 가져올 이미지를 정의
-FROM node:20-alpine
-# 경로 설정하기
-WORKDIR /src
-# package.json 워킹 디렉토리에 복사 (.은 설정한 워킹 디렉토리를 뜻함)
-COPY package.json .
-# 명령어 실행 (의존성 설치)
-RUN yarn install
-# 현재 디렉토리의 모든 파일을 도커 컨테이너의 워킹 디렉토리에 복사한다.
+# map_front용 Dockerfile
+FROM node:20-alpine AS build
+WORKDIR /app
+
+# 빌드 인자로 환경 변수 받기
+ARG VITE_REACT_APP_KAKAO_JS_KEY
+ARG VITE_MAP_SERVER_CONTEXT_PATH
+ARG VITE_MAP_SERVER_PORT
+ARG VITE_API_BASE_URL
+ARG VITE_BACK_OFFICE_PORT
+
+# 환경 변수로 설정 (빌드 시점에서 사용)
+ENV VITE_REACT_APP_KAKAO_JS_KEY=$VITE_REACT_APP_KAKAO_JS_KEY
+ENV VITE_MAP_SERVER_CONTEXT_PATH=$VITE_MAP_SERVER_CONTEXT_PATH
+ENV VITE_MAP_SERVER_PORT=$VITE_MAP_SERVER_PORT
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+ENV VITE_BACK_OFFICE_PORT=$VITE_BACK_OFFICE_PORT
+
+# 패키지 파일 복사 및 의존성 설치
+COPY package*.json yarn.lock* ./
+RUN yarn install --frozen-lockfile
+
 COPY . .
 
-# 각각의 명령어들은 한줄 한줄씩 캐싱되어 실행된다.
-# package.json의 내용은 자주 바뀌진 않을 거지만
-# 소스 코드는 자주 바뀌는데
-# npm install과 COPY . . 를 동시에 수행하면
-# 소스 코드가 조금 달라질때도 항상 npm install을 수행해서 리소스가 낭비된다.
+RUN yarn run build
 
-# 포트 노출
-EXPOSE 5173
-
-# npm run dev 스크립트 실행
-CMD ["npm", "run", "prod"]
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

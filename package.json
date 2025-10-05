@@ -34,7 +34,7 @@
     "build": "NODE_ENV=production tsc --noEmit --skipLibCheck && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prod": "NODE_ENV=production vite --host"
+    "prod": "NODE_ENV=production vite --host --port 5173"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +61,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.2.1",
     "babel-plugin-styled-components": "^2.1.4",
-    "vite": "^5.4.18"
+    "vite": "^5.4.18",
+    "vite-plugin-remove-console": "^2.2.0"
   }
 }
