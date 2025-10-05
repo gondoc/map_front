@@ -53,8 +53,10 @@ const StToastAreaWrapper = styled.div<{ $isShow: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1920px;
-    height: 1080px;
+    //width: 1920px;
+    width: 100vw;
+    //height: 1080px;
+    height: 100vh;
     transition: all 250ms;
     opacity: ${({$isShow}) => $isShow ? '1' : '0'};
     visibility: ${({$isShow}) => $isShow ? 'visible' : 'hidden'};

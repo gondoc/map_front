@@ -40,7 +40,8 @@ const StResetBtnArea = styled.div`
     position: absolute;
     display: flex;
     top: 10px;
-    left: 270px;
+    //left: 270px;
+    left: 14.063vw;
     align-items: center;
     justify-content: center;
     width: 94px;

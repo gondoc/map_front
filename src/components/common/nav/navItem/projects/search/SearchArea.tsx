@@ -73,7 +73,8 @@ const StSearchArea = styled.div<{ $isOpen: boolean }>`
 
 const StProjectSearchInput = styled.input`
     border: none;
-    width: 232px;
+    //width: 232px;
+    width: 12vw;
     margin-top: 3px;
     padding-left: 8px;
     border-radius: 5px;

@@ -67,7 +67,6 @@ const StYearListArea = styled.div<{ $isOpen: boolean }>`
     height: ${(props) => props.$isOpen ? "max-content" : "0"};
     opacity: ${({$isOpen}) => $isOpen ? '1' : '0'};
     visibility: ${({$isOpen}) => $isOpen ? 'visible' : 'hidden'};
-
 `
 
 const StYearSubArea = styled.div<{ $isOpen: boolean, $itemSize: number }>`
@@ -84,7 +83,8 @@ const StYearSubArea = styled.div<{ $isOpen: boolean, $itemSize: number }>`
 const StYearLabelArea = styled.div<{ $isActive: boolean }>`
     display: flex;
     align-items: center;
-    width: 232px;
+    //width: 232px;
+    width: 12.083vw;
     height: 20px;
 
     overflow: hidden;

@@ -94,7 +94,8 @@ export const StItemArea = styled.div<{ $isActive: boolean }>`
     align-items: center;
     margin-top: 11px;
     border-radius: 8px;
-    width: 240px;
+    //width: 240px;
+    width: 12.5vw;
     height: 40px;
 
     transition: all 250ms;

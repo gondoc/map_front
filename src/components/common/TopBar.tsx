@@ -24,8 +24,9 @@ const TopAreaWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: right;
-    position: relative;
-    width: 1920px;
+    position: absolute;
+    //width: 1920px;
+    width: 100vw;
     height: 70px;
     background-color: #D6E6F2;
     z-index: 1;

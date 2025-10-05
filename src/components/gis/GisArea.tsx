@@ -40,7 +40,8 @@ const GisArea = () => {
                     isPanto={true}
                     disableDoubleClick={false}
                     level={zoomLevel}
-                    style={{width: '100%', height: '100%'}}
+                    // style={{width: '100%', height: '100%'}}
+                    style={{width: '100vw', height: '100vh'}}
                     minLevel={12}
                 >
                     <ResetBtn/>

@@ -46,10 +46,13 @@ export default HistList
 
 export const StNavSubItemArea = styled.div<{ $isOpen: boolean, $itemSize: number }>`
     position: relative;
+    display: flex;
 
     align-items: center;
     flex-direction: column;
-    width: 240px;
+    //width: 240px;
+    width: 12.5vw;
+
 
     transition: all 250ms;
     height: ${({$isOpen, $itemSize}) => $isOpen ? `calc(${$itemSize}*23px)` : '0'};
@@ -58,7 +61,9 @@ export const StNavSubItemArea = styled.div<{ $isOpen: boolean, $itemSize: number
 `
 
 export const StProjectItemLi = styled.div<{ $isActive: boolean }>`
-    width: 232px;
+    //width: 232px;
+    width: 12.083vw;
+    
     height: 20px;
     overflow: hidden;
     white-space: nowrap;
